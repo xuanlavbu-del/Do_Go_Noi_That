@@ -1,0 +1,571 @@
+/* =====================================
+   RESET
+===================================== */
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:
+            "Segoe UI",
+            Arial,
+            sans-serif;
+    background:#f8f9fa;
+    color:#333;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+
+.navbar-brand{
+    font-size:24px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.nav-link{
+    font-size:16px;
+    margin-left:10px;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+
+footer{
+    margin-top:50px;
+}
+
+
+/* =====================================
+   PRODUCT CARD
+===================================== */
+
+
+.card{
+    border:none;
+    border-radius:12px;
+    overflow:hidden;
+    transition:0.3s;
+    box-shadow:
+            0 3px 10px rgba(0,0,0,0.1);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:
+            0 8px 20px rgba(0,0,0,0.2);
+}
+
+
+
+.card img{
+    object-fit:cover;
+    transition:0.3s;
+}
+
+.card img:hover{
+    transform:scale(1.05);
+}
+
+
+
+
+.card-title{
+
+    font-weight:bold;
+    color:#5a3a1b;
+}
+
+
+
+.text-danger{
+    font-size:18px;
+    font-weight:bold;
+}
+
+
+
+
+
+/* =====================================
+   BUTTON
+===================================== */
+
+
+.btn{
+    border-radius:20px;
+    padding-left:20px;
+    padding-right:20px;
+}
+
+
+
+.btn-success{
+    background:#795548;
+    border-color:#795548;
+}
+
+.btn-success:hover{
+    background:#5d4037;
+}
+
+
+
+
+.btn-primary{
+    background:#8d6e63;
+    border-color:#8d6e63;
+}
+
+
+
+/* =====================================
+   PRODUCT DETAIL
+===================================== */
+.product-detail img{
+    border-radius:15px;
+}
+
+
+.product-detail h2{
+    color:#5d4037;
+}
+
+
+
+
+
+
+
+/* =====================================
+   SEARCH
+===================================== */
+
+
+.input-group input{
+    border-radius:20px 0 0 20px;
+}
+
+
+
+.input-group button{
+    border-radius:0 20px 20px 0;
+}
+
+
+
+
+
+
+
+/* =====================================
+   CART
+===================================== */
+
+
+.table{
+
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.table img{
+    border-radius:8px;
+}
+
+
+
+
+.cart-total{
+    font-size:22px;
+    font-weight:bold;
+    color:#c62828;
+}
+
+
+
+
+
+
+
+/* =====================================
+   LOGIN REGISTER
+===================================== */
+
+
+.form-control{
+    border-radius:20px;
+    padding:12px;
+}
+
+
+
+.login-box{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:
+            0 5px 20px rgba(0,0,0,.15);
+}
+
+
+
+
+
+
+
+/* =====================================
+   ADMIN
+===================================== */
+
+
+.admin-title{
+    color:#5d4037;
+    font-weight:bold;
+}
+
+
+
+
+.admin-table img{
+
+
+    width:80px;
+
+
+    height:80px;
+
+
+    object-fit:cover;
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   IMAGE PREVIEW
+===================================== */
+
+
+#preview{
+
+
+    max-width:200px;
+
+
+    margin-top:10px;
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   BACK TO TOP
+===================================== */
+
+
+#btnTop{
+
+
+    position:fixed;
+
+
+    right:20px;
+
+
+    bottom:20px;
+
+
+    display:none;
+
+
+    width:45px;
+
+
+    height:45px;
+
+
+    border-radius:50%;
+
+
+    border:none;
+
+
+    background:#795548;
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   RESPONSIVE TABLET
+===================================== */
+
+
+@media(max-width:992px){
+
+
+    .navbar-brand{
+
+
+        font-size:20px;
+
+
+    }
+
+
+
+    .card{
+
+
+        margin-bottom:20px;
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   RESPONSIVE MOBILE
+===================================== */
+
+
+@media(max-width:768px){
+
+
+
+    body{
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+
+
+    .container{
+
+
+        width:95%;
+
+
+    }
+
+
+
+
+
+    .navbar-nav{
+
+
+        text-align:center;
+
+
+    }
+
+
+
+
+
+    .card img{
+
+
+        height:200px!important;
+
+
+    }
+
+
+
+
+
+    .table{
+
+
+        font-size:13px;
+
+
+    }
+
+
+
+
+
+    .table thead{
+
+
+        display:none;
+
+
+    }
+
+
+
+
+
+    .table tr{
+
+
+        display:block;
+
+
+        margin-bottom:15px;
+
+
+        border:1px solid #ddd;
+
+
+        border-radius:10px;
+
+
+        padding:10px;
+
+
+    }
+
+
+
+
+
+    .table td{
+
+
+        display:flex;
+
+
+        justify-content:space-between;
+
+
+    }
+
+
+
+
+
+    .table td::before{
+
+
+        content:attr(data-label);
+
+
+        font-weight:bold;
+
+
+    }
+
+
+
+
+
+
+    .btn{
+
+
+        width:100%;
+
+
+        margin-top:5px;
+
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   SMALL PHONE
+===================================== */
+
+
+@media(max-width:480px){
+
+
+
+    h2{
+
+
+        font-size:22px;
+
+
+    }
+
+
+
+
+    .card-body{
+
+
+        padding:15px;
+
+
+    }
+
+
+
+}
