@@ -143,7 +143,7 @@ public class QuanlySanPhamServlet extends HttpServlet {
 
 
         List<SanPham> danhSach =
-                sanPhamDAO.layTatCaSanPham();
+                sanPhamDAO.getAll();
 
 
 

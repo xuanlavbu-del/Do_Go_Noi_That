@@ -90,7 +90,7 @@ public class DashboardServlet extends HttpServlet {
 
             tongSanPham =
                     sanPhamDAO
-                            .layTatCaSanPham()
+                            .getAll()
                             .size();
 
         } catch (Exception e) {

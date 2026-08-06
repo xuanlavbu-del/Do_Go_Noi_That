@@ -1,92 +1,979 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <!DOCTYPE html>
-
 <html lang="vi">
 
 <head>
 
     <meta charset="UTF-8">
 
-    <title>Dashboard Admin</title>
+    <title>Dashboard Quản Trị</title>
 
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 
+    <style>
+
+        .brand-link{
+
+            font-size:22px;
+
+            font-weight:bold;
+
+        }
+
+        .small-box{
+
+            border-radius:10px;
+
+        }
+
+        .content-wrapper{
+
+            background:#f4f6f9;
+
+        }
+
+        .nav-sidebar .nav-link{
+
+            font-size:15px;
+
+        }
+
+    </style>
 
 </head>
 
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 
-<nav class="navbar navbar-dark bg-dark">
+<div class="wrapper">
 
-    <span class="navbar-brand">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
-        ĐỒ GỖ NỘI THẤT ADMIN
+        <ul class="navbar-nav">
 
-    </span>
+            <li class="nav-item">
 
-    <span class="text-white">
+                <a class="nav-link"
+                   data-widget="pushmenu"
+                   href="#">
 
-        Xin chào
+                    <i class="fas fa-bars"></i>
 
-        <b>
+                </a>
 
-            <%=session.getAttribute("hoTen")%>
+            </li>
 
-        </b>
+        </ul>
 
-    </span>
+        <ul class="navbar-nav ml-auto">
 
-</nav>
-<jsp:include page="include/header.jsp"/>
-<div class="container-fluid">
+            <li class="nav-item dropdown">
 
-    <div class="row">
+                <a class="nav-link"
+                   data-toggle="dropdown"
+                   href="#">
 
-        <!-- SIDEBAR -->
+                    <i class="far fa-user-circle fa-lg"></i>
 
-        <div class="col-md-2 sidebar p-0">
-            <jsp:include page="include/sidebar.jsp"/>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right">
+
+                <span class="dropdown-item">
+
+                    Xin chào Admin
+
+                </span>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a href="${pageContext.request.contextPath}/dangXuat"
+                       class="dropdown-item">
+
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+
+                        Đăng xuất
+
+                    </a>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+        <a href="${pageContext.request.contextPath}/dashboard"
+           class="brand-link">
+
+            <i class="fas fa-couch ml-3"></i>
+
+            <span class="brand-text ml-2">
+
+            Đồ Gỗ Nội Thất
+
+        </span>
+
+        </a>
+
+        <div class="sidebar">
+
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+
+                <div class="image">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                         class="img-circle elevation-2">
+
+                </div>
+
+                <div class="info">
+
+                    <a href="#"
+                       class="d-block">
+
+                        Administrator
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <nav class="mt-2">
+
+                <ul class="nav nav-pills nav-sidebar flex-column"
+
+                    data-widget="treeview"
+
+                    role="menu"
+
+                    data-accordion="false">
+
+                    <li class="nav-item">
+
+                        <a href="${pageContext.request.contextPath}/dashboard"
+
+                           class="nav-link active">
+
+                            <i class="nav-icon fas fa-gauge-high"></i>
+
+                            <p>
+
+                                Dashboard
+
+                            </p>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item has-treeview">
+
+                        <a href="#"
+
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-box"></i>
+
+                            <p>
+
+                                Quản lý sản phẩm
+
+                                <i class="right fas fa-angle-left"></i>
+
+                            </p>
+
+                        </a>
+
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+
+                                <a href="${pageContext.request.contextPath}/quanlySanPham"
+
+                                   class="nav-link">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>Danh sách sản phẩm</p>
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a href="${pageContext.request.contextPath}/danhMuc"
+
+                                   class="nav-link">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>Danh mục</p>
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+                    <li class="nav-item has-treeview">
+
+                        <a href="#"
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-warehouse"></i>
+
+                            <p>
+
+                                Quản lý kho
+
+                                <i class="right fas fa-angle-left"></i>
+
+                            </p>
+
+                        </a>
+
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+
+                                <a href="${pageContext.request.contextPath}/quanLyKho"
+                                   class="nav-link">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>
+
+                                        Tổng quan kho
+
+                                    </p>
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a href="${pageContext.request.contextPath}/kiemKe"
+                                   class="nav-link">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>
+
+                                        Kiểm kê kho
+
+                                    </p>
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a href="${pageContext.request.contextPath}/chuyenKho"
+                                   class="nav-link">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>
+
+                                        Chuyển kho
+
+                                    </p>
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a href="${pageContext.request.contextPath}/lich-su-nhap"
+                                   class="nav-link">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>
+
+                                        Lịch sử nhập
+
+                                    </p>
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a href="${pageContext.request.contextPath}/lich-su-xuat"
+                                   class="nav-link">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>
+
+                                        Lịch sử xuất
+
+                                    </p>
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a href="${pageContext.request.contextPath}/bao-cao-kho"
+                                   class="nav-link">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>
+
+                                        Báo cáo kho
+
+                                    </p>
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="${pageContext.request.contextPath}/khachhang"
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-users"></i>
+
+                            <p>
+
+                                Khách hàng
+
+                            </p>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="${pageContext.request.contextPath}/quanLyDonHang"
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-cart-shopping"></i>
+
+                            <p>
+
+                                Đơn hàng
+
+                            </p>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="${pageContext.request.contextPath}/quanLyTaiKhoan"
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-user-shield"></i>
+
+                            <p>
+
+                                Tài khoản
+
+                            </p>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="${pageContext.request.contextPath}/thongKe"
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-chart-pie"></i>
+
+                            <p>
+
+                                Thống kê
+
+                            </p>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="${pageContext.request.contextPath}/caiDat"
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-gears"></i>
+
+                            <p>
+
+                                Cài đặt
+
+                            </p>
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="${pageContext.request.contextPath}/dangXuat"
+                           class="nav-link text-danger">
+
+                            <i class="nav-icon fas fa-right-from-bracket"></i>
+
+                            <p>
+
+                                Đăng xuất
+
+                            </p>
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </nav>
+
         </div>
 
-        <!-- CONTENT -->
+    </aside>
 
-        <div class="col-md-10">
+    <div class="content-wrapper">
 
-            <div class="container mt-4">
+        <section class="content-header">
 
-                <h2>
+            <div class="container-fluid">
 
-                    Dashboard
+                <div class="row mb-2">
 
-                </h2>
+                    <div class="col-sm-6">
 
-                <hr>
+                        <h1>
+
+                            Dashboard Quản Trị
+
+                        </h1>
+
+                    </div>
+
+                    <div class="col-sm-6">
+
+                        <ol class="breadcrumb float-sm-right">
+
+                            <li class="breadcrumb-item">
+
+                                <a href="${pageContext.request.contextPath}/dashboard">
+
+                                    Trang chủ
+
+                                </a>
+
+                            </li>
+
+                            <li class="breadcrumb-item active">
+
+                                Dashboard
+
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="content">
+
+            <div class="container-fluid">
 
                 <div class="row">
+                    <div class="col-lg-3 col-6">
 
-                    <div class="col-md-3">
+                        <div class="small-box bg-info">
 
-                        <div class="card bg-primary text-white card-dashboard">
+                            <div class="inner">
 
-                            <div class="card-body">
+                                <h3>${tongSanPham}</h3>
 
-                                <h3>
+                                <p>Sản phẩm</p>
 
-                                    ${tongSanPham}
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-box"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/quanlySanPham"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-success">
+
+                            <div class="inner">
+
+                                <h3>${tongKhachHang}</h3>
+
+                                <p>Khách hàng</p>
+
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-users"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/khachhang"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-warning">
+
+                            <div class="inner">
+
+                                <h3>${tongDonHang}</h3>
+
+                                <p>Đơn hàng</p>
+
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-cart-shopping"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/quanLyDonHang"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-danger">
+
+                            <div class="inner">
+
+                                <h3>${tongTaiKhoan}</h3>
+
+                                <p>Tài khoản</p>
+
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-user-shield"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/quanLyTaiKhoan"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-primary">
+
+                            <div class="inner">
+
+                                <h3>${tongKho}</h3>
+
+                                <p>Kho</p>
+
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-warehouse"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/quanLyKho"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-secondary">
+
+                            <div class="inner">
+
+                                <h3>${tongTonKho}</h3>
+
+                                <p>Tổng tồn kho</p>
+
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-cubes"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/bao-cao-kho"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-indigo">
+
+                            <div class="inner">
+
+                                <h3>${tongPhieuNhap}</h3>
+
+                                <p>Phiếu nhập</p>
+
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-file-import"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/lich-su-nhap"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-maroon">
+
+                            <div class="inner">
+
+                                <h3>${tongPhieuXuat}</h3>
+
+                                <p>Phiếu xuất</p>
+
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-file-export"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/lich-su-xuat"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-teal">
+
+                            <div class="inner">
+
+                                <h3>${tongKiemKe}</h3>
+
+                                <p>Phiếu kiểm kê</p>
+
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-clipboard-check"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/kiemKe"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+
+                        <div class="small-box bg-orange">
+
+                            <div class="inner">
+
+                                <h3>${tongChuyenKho}</h3>
+
+                                <p>Chuyển kho</p>
+
+                            </div>
+
+                            <div class="icon">
+
+                                <i class="fas fa-right-left"></i>
+
+                            </div>
+
+                            <a href="${pageContext.request.contextPath}/chuyenKho"
+                               class="small-box-footer">
+
+                                Chi tiết
+
+                                <i class="fas fa-arrow-circle-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+
+                        <div class="card">
+
+                            <div class="card-header bg-primary">
+
+                                <h3 class="card-title text-white">
+
+                                    <i class="fas fa-chart-bar mr-2"></i>
+
+                                    Thống kê hệ thống
 
                                 </h3>
 
-                                <p>
+                            </div>
 
-                                    Sản phẩm
+                            <div class="card-body p-0">
 
-                                </p>
+                                <table class="table table-bordered table-hover mb-0">
+
+                                    <thead class="thead-dark">
+
+                                    <tr>
+
+                                        <th>Danh mục</th>
+
+                                        <th class="text-center">Số lượng</th>
+
+                                    </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                    <tr>
+
+                                        <td>Tổng sản phẩm</td>
+
+                                        <td class="text-center">
+
+                                            ${tongSanPham}
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>Tổng khách hàng</td>
+
+                                        <td class="text-center">
+
+                                            ${tongKhachHang}
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>Tổng đơn hàng</td>
+
+                                        <td class="text-center">
+
+                                            ${tongDonHang}
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>Tổng kho</td>
+
+                                        <td class="text-center">
+
+                                            ${tongKho}
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>Tổng tồn kho</td>
+
+                                        <td class="text-center">
+
+                                            ${tongTonKho}
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>Phiếu nhập</td>
+
+                                        <td class="text-center">
+
+                                            ${tongPhieuNhap}
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>Phiếu xuất</td>
+
+                                        <td class="text-center">
+
+                                            ${tongPhieuXuat}
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>Phiếu kiểm kê</td>
+
+                                        <td class="text-center">
+
+                                            ${tongKiemKe}
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>Phiếu chuyển kho</td>
+
+                                        <td class="text-center">
+
+                                            ${tongChuyenKho}
+
+                                        </td>
+
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
 
                             </div>
 
@@ -94,21 +981,33 @@
 
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-lg-4">
 
-                        <div class="card bg-success text-white card-dashboard">
+                        <div class="card">
 
-                            <div class="card-body">
+                            <div class="card-header bg-danger">
 
-                                <h3>
+                                <h3 class="card-title text-white">
 
-                                    ${tongKhachHang}
+                                    <i class="fas fa-triangle-exclamation mr-2"></i>
+
+                                    Sản phẩm sắp hết
 
                                 </h3>
 
-                                <p>
+                            </div>
 
-                                    Khách hàng
+                            <div class="card-body">
+
+                                <h1 class="text-center text-danger">
+
+                                    ${sanPhamSapHet}
+
+                                </h1>
+
+                                <p class="text-center">
+
+                                    Sản phẩm tồn dưới 10
 
                                 </p>
 
@@ -116,49 +1015,71 @@
 
                         </div>
 
-                    </div>
+                        <div class="card">
 
-                    <div class="col-md-3">
+                            <div class="card-header bg-success">
 
-                        <div class="card bg-warning text-white card-dashboard">
+                                <h3 class="card-title text-white">
 
-                            <div class="card-body">
+                                    <i class="fas fa-bolt mr-2"></i>
 
-                                <h3>
-
-                                    ${tongDonHang}
+                                    Truy cập nhanh
 
                                 </h3>
-
-                                <p>
-
-                                    Đơn hàng
-
-                                </p>
 
                             </div>
 
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3">
-
-                        <div class="card bg-danger text-white card-dashboard">
-
                             <div class="card-body">
 
-                                <h3>
+                                <a href="${pageContext.request.contextPath}/quanlySanPham"
 
-                                    ${tongTaiKhoan}
+                                   class="btn btn-primary btn-block mb-2">
 
-                                </h3>
+                                    <i class="fas fa-box mr-2"></i>
 
-                                <p>
+                                    Quản lý sản phẩm
 
-                                    Tài khoản
+                                </a>
 
-                                </p>
+                                <a href="${pageContext.request.contextPath}/quanLyKho"
+
+                                   class="btn btn-info btn-block mb-2">
+
+                                    <i class="fas fa-warehouse mr-2"></i>
+
+                                    Quản lý kho
+
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/kiemKe"
+
+                                   class="btn btn-warning btn-block mb-2">
+
+                                    <i class="fas fa-clipboard-check mr-2"></i>
+
+                                    Kiểm kê
+
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/chuyenKho"
+
+                                   class="btn btn-secondary btn-block mb-2">
+
+                                    <i class="fas fa-right-left mr-2"></i>
+
+                                    Chuyển kho
+
+                                </a>
+
+                                <a href="${pageContext.request.contextPath}/bao-cao-kho"
+
+                                   class="btn btn-danger btn-block">
+
+                                    <i class="fas fa-chart-column mr-2"></i>
+
+                                    Báo cáo kho
+
+                                </a>
 
                             </div>
 
@@ -168,16 +1089,39 @@
 
                 </div>
 
-                <hr>
+            </div>
 
-
-
-        </div>
+        </section>
 
     </div>
+                <footer class="main-footer">
 
-</div>
-<jsp:include page="include/footer.jsp"/>
+                    <strong>
+
+                        Copyright &copy; 2026
+
+                        Đồ Gỗ Nội Thất.
+
+                    </strong>
+
+                    All rights reserved.
+
+                    <div class="float-right d-none d-sm-inline-block">
+
+                        Version 1.0
+
+                    </div>
+
+                </footer>
+
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+            <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
 </body>
 
 </html>

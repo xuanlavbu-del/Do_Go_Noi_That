@@ -14,7 +14,7 @@ public class SanPhamDAO {
     // Lấy tất cả sản phẩm
     // ===============================
 
-    public List<SanPham> layTatCaSanPham() {
+    public List<SanPham> getAll() {
 
         List<SanPham> danhSach = new ArrayList<>();
 

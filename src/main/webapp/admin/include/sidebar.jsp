@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
 <div class="bg-dark text-white vh-100">
 
     <h5 class="text-center pt-3">
@@ -15,6 +16,14 @@
        href="<%=request.getContextPath()%>/dashboard">
 
         🏠 Dashboard
+
+    </a>
+
+    <a class="d-block text-white p-3"
+
+       href="<%=request.getContextPath()%>/quanLyKho">
+
+        📦 Quản lý kho
 
     </a>
 
