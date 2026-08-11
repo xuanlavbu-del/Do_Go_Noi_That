@@ -109,7 +109,7 @@
 
                     <div class="row mt-3">
                         <div class="col-md-6 text-left">
-                            <a href="${pageContext.request.contextPath}/lich-su-nhap" class="btn btn-secondary">
+                            <a href="${pageContext.request.contextPath}/lichSuNhap" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i>
                                 Quay lại
                             </a>

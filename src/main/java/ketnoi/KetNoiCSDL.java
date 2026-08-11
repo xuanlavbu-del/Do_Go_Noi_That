@@ -28,22 +28,19 @@ public class KetNoiCSDL {
      * Lấy kết nối đến CSDL
      */
     public static Connection getConnection() {
-
-        Connection connection = null;
-
         try {
-
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Kết nối CSDL thành công.");
+            return connection;
         } catch (SQLException e) {
-
             System.out.println("Không thể kết nối CSDL.");
-
             e.printStackTrace();
-
+            return null;
         }
 
-        return connection;
+
+
+
     }
 
     /**

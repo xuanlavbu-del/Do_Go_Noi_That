@@ -42,7 +42,7 @@ public class ChiTietPhieuNhapServlet extends HttpServlet {
 
                 response.sendRedirect(
                         request.getContextPath()
-                                + "/lich-su-nhap"
+                                + "/lichSuNhap"
                 );
 
                 return;

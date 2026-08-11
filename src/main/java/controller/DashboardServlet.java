@@ -116,7 +116,7 @@ public class DashboardServlet extends HttpServlet {
 
             tongTaiKhoan =
                     taiKhoanDAO
-                            .layTatCaTaiKhoan()
+                            .getAll()
                             .size();
 
         } catch (Exception e) {

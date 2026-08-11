@@ -7,6 +7,10 @@ public class ChiTietPhieuXuat {
     private int maSanPham;
     private int maKho;
     private int soLuong;
+    private double donGia;
+    private double thanhTien;
+    private String tenSanPham;
+    private String tenKho;
 
     public ChiTietPhieuXuat() {
     }
@@ -49,6 +53,38 @@ public class ChiTietPhieuXuat {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
+    }
+
+    public double getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(double donGia) {
+        this.donGia = donGia;
+    }
+
+    public double getThanhTien() {
+        return thanhTien;
+    }
+
+    public void setThanhTien(double thanhTien) {
+        this.thanhTien = thanhTien;
+    }
+
+    public String getTenSanPham() {
+        return tenSanPham;
+    }
+
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
+    }
+
+    public String getTenKho() {
+        return tenKho;
+    }
+
+    public void setTenKho(String tenKho) {
+        this.tenKho = tenKho;
     }
 
 }

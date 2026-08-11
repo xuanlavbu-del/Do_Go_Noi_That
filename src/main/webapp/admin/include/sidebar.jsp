@@ -45,7 +45,7 @@
 
     <a class="d-block text-white p-3"
 
-       href="#">
+       href="<%=request.getContextPath()%>/quanLyDanhMuc">
 
         📂 Danh mục
 

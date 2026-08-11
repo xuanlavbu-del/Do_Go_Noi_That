@@ -16,9 +16,9 @@
                 <a href="${pageContext.request.contextPath}/quanLyKho" class="list-group-item list-group-item-action active">Quản lý kho</a>
                 <a href="${pageContext.request.contextPath}/chuyenKho" class="list-group-item list-group-item-action">Chuyển kho</a>
                 <a href="${pageContext.request.contextPath}/kiemKe" class="list-group-item list-group-item-action">Kiểm kê kho</a>
-                <a href="${pageContext.request.contextPath}/lich-su-nhap" class="list-group-item list-group-item-action">Lịch sử nhập</a>
-                <a href="${pageContext.request.contextPath}/lich-su-xuat" class="list-group-item list-group-item-action">Lịch sử xuất</a>
-                <a href="${pageContext.request.contextPath}/bao-cao-kho" class="list-group-item list-group-item-action">Báo cáo kho</a>
+                <a href="${pageContext.request.contextPath}/lichSuNhap" class="list-group-item list-group-item-action">Lịch sử nhập</a>
+                <a href="${pageContext.request.contextPath}/lichSuXuat" class="list-group-item list-group-item-action">Lịch sử xuất</a>
+                <a href="${pageContext.request.contextPath}/baoCaoKho" class="list-group-item list-group-item-action">Báo cáo kho</a>
             </div>
         </div>
         <div class="col-md-10">

@@ -1,129 +1,75 @@
 package model;
-
-import java.io.Serializable;
-
-public class TaiKhoan implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    // Thuộc tính
+public class TaiKhoan {
     private int maTaiKhoan;
+    private String tenDangNhap;
+    private String matKhau;
     private String hoTen;
     private String email;
-    private String matKhau;
     private String soDienThoai;
-    private String diaChi;
     private String vaiTro;
-
-    // Constructor mặc định
+    private String trangThai;
     public TaiKhoan() {
     }
-
-    // Constructor đầy đủ
-    public TaiKhoan(int maTaiKhoan, String hoTen, String email,
-                    String matKhau, String soDienThoai,
-                    String diaChi, String vaiTro) {
-
+    public TaiKhoan(int maTaiKhoan, String tenDangNhap, String matKhau, String hoTen, String email, String soDienThoai, String vaiTro, String trangThai) {
         this.maTaiKhoan = maTaiKhoan;
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
         this.hoTen = hoTen;
         this.email = email;
-        this.matKhau = matKhau;
         this.soDienThoai = soDienThoai;
-        this.diaChi = diaChi;
         this.vaiTro = vaiTro;
+        this.trangThai = trangThai;
     }
-
-    // Constructor thêm mới (không có mã)
-    public TaiKhoan(String hoTen, String email,
-                    String matKhau, String soDienThoai,
-                    String diaChi, String vaiTro) {
-
-        this.hoTen = hoTen;
-        this.email = email;
-        this.matKhau = matKhau;
-        this.soDienThoai = soDienThoai;
-        this.diaChi = diaChi;
-        this.vaiTro = vaiTro;
-    }
-
-    // Getter & Setter
-
     public int getMaTaiKhoan() {
         return maTaiKhoan;
     }
-
     public void setMaTaiKhoan(int maTaiKhoan) {
         this.maTaiKhoan = maTaiKhoan;
     }
-
-    public String getHoTen() {
-        return hoTen;
+    public String getTenDangNhap() {
+        return tenDangNhap;
     }
-
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
+    public void setTenDangNhap(String tenDangNhap) {
+        this.tenDangNhap = tenDangNhap;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getMatKhau() {
         return matKhau;
     }
-
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
     }
-
+    public String getHoTen() {
+        return hoTen;
+    }
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public String getSoDienThoai() {
         return soDienThoai;
     }
-
     public void setSoDienThoai(String soDienThoai) {
         this.soDienThoai = soDienThoai;
     }
-
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
     public String getVaiTro() {
         return vaiTro;
     }
-
     public void setVaiTro(String vaiTro) {
         this.vaiTro = vaiTro;
     }
+    public String getTrangThai() {
+        return trangThai;
+    }
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
 
-    // Kiểm tra có phải quản trị viên
     public boolean laQuanTri() {
-        return "ADMIN".equalsIgnoreCase(vaiTro);
-    }
-
-    // Kiểm tra có phải khách hàng
-    public boolean laKhachHang() {
-        return "KHACH".equalsIgnoreCase(vaiTro);
-    }
-
-    @Override
-    public String toString() {
-        return "TaiKhoan{" +
-                "maTaiKhoan=" + maTaiKhoan +
-                ", hoTen='" + hoTen + '\'' +
-                ", email='" + email + '\'' +
-                ", matKhau='" + matKhau + '\'' +
-                ", soDienThoai='" + soDienThoai + '\'' +
-                ", diaChi='" + diaChi + '\'' +
-                ", vaiTro='" + vaiTro + '\'' +
-                '}';
+        return "ADMIN".equalsIgnoreCase(this.vaiTro);
     }
 }

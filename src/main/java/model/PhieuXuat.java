@@ -8,6 +8,8 @@ public class PhieuXuat {
     private Date ngayXuat;
     private String nguoiNhan;
     private String ghiChu;
+    private double tongTien;
+
 
     public PhieuXuat() {
     }
@@ -43,5 +45,11 @@ public class PhieuXuat {
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
+    public double getTongTien() {
+        return tongTien;
+    }
 
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
+    }
 }

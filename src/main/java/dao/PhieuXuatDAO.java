@@ -153,9 +153,21 @@ public class PhieuXuatDAO {
                 new ArrayList<>();
 
         String sql = """
-                SELECT *
-                FROM phieu_xuat
-                ORDER BY ma_phieu_xuat DESC
+                SELECT
+                    px.MaPhieuXuat,
+                    px.NgayXuat,
+                    px.NguoiNhan,
+                    px.GhiChu,
+                    SUM(ct.SoLuong * ct.DonGia) AS TongTien
+                FROM PhieuXuat px
+                JOIN ChiTietPhieuXuat ct
+                ON px.MaPhieuXuat = ct.MaPhieuXuat
+                GROUP BY
+                    px.MaPhieuXuat,
+                    px.NgayXuat,
+                    px.NguoiNhan,
+                    px.GhiChu
+                ORDER BY px.MaPhieuXuat DESC;
                 """;
         try (
                 Connection conn =
@@ -169,25 +181,16 @@ public class PhieuXuatDAO {
 
         ) {
 
-            while (rs.next()) {
+            while(rs.next()){
+                PhieuXuat px = new PhieuXuat();
 
-                PhieuXuat px =
-                        new PhieuXuat();
-
-                px.setMaPhieuXuat(
-                        rs.getInt("ma_phieu_xuat"));
-
-                px.setNgayXuat(
-                        rs.getDate("ngay_xuat"));
-
-                px.setNguoiNhan(
-                        rs.getString("nguoi_nhan"));
-
-                px.setGhiChu(
-                        rs.getString("ghi_chu"));
+                px.setMaPhieuXuat(rs.getInt("MaPhieuXuat"));
+                px.setNgayXuat(rs.getDate("NgayXuat"));
+                px.setNguoiNhan(rs.getString("NguoiNhan"));
+                px.setGhiChu(rs.getString("GhiChu"));
+                px.setTongTien(rs.getDouble("TongTien"));
 
                 ds.add(px);
-
             }
 
         }

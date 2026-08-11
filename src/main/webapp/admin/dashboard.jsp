@@ -213,7 +213,7 @@
 
                             <li class="nav-item">
 
-                                <a href="${pageContext.request.contextPath}/danhMuc"
+                                <a href="${pageContext.request.contextPath}/quanLyDanhMuc"
 
                                    class="nav-link">
 
@@ -300,7 +300,7 @@
 
                             <li class="nav-item">
 
-                                <a href="${pageContext.request.contextPath}/lich-su-nhap"
+                                <a href="${pageContext.request.contextPath}/lichSuNhap"
                                    class="nav-link">
 
                                     <i class="far fa-circle nav-icon"></i>
@@ -317,7 +317,7 @@
 
                             <li class="nav-item">
 
-                                <a href="${pageContext.request.contextPath}/lich-su-xuat"
+                                <a href="${pageContext.request.contextPath}/lichSuXuat"
                                    class="nav-link">
 
                                     <i class="far fa-circle nav-icon"></i>
@@ -334,7 +334,7 @@
 
                             <li class="nav-item">
 
-                                <a href="${pageContext.request.contextPath}/bao-cao-kho"
+                                <a href="${pageContext.request.contextPath}/baoCaoKho"
                                    class="nav-link">
 
                                     <i class="far fa-circle nav-icon"></i>
@@ -689,7 +689,7 @@
 
                             </div>
 
-                            <a href="${pageContext.request.contextPath}/bao-cao-kho"
+                            <a href="${pageContext.request.contextPath}/baoCaoKho"
                                class="small-box-footer">
 
                                 Chi tiết
@@ -720,7 +720,7 @@
 
                             </div>
 
-                            <a href="${pageContext.request.contextPath}/lich-su-nhap"
+                            <a href="${pageContext.request.contextPath}/lichSuNhap"
                                class="small-box-footer">
 
                                 Chi tiết
@@ -751,7 +751,7 @@
 
                             </div>
 
-                            <a href="${pageContext.request.contextPath}/lich-su-xuat"
+                            <a href="${pageContext.request.contextPath}/lichSuXuat"
                                class="small-box-footer">
 
                                 Chi tiết

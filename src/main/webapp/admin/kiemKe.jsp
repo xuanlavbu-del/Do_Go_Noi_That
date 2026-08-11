@@ -63,17 +63,17 @@
                     Chuyển kho
                 </a>
 
-                <a href="${pageContext.request.contextPath}/lich-su-nhap"
+                <a href="${pageContext.request.contextPath}/lichSuNhap"
                    class="list-group-item list-group-item-action">
                     Lịch sử nhập
                 </a>
 
-                <a href="${pageContext.request.contextPath}/lich-su-xuat"
+                <a href="${pageContext.request.contextPath}/lichSuXuat"
                    class="list-group-item list-group-item-action">
                     Lịch sử xuất
                 </a>
 
-                <a href="${pageContext.request.contextPath}/bao-cao-kho"
+                <a href="${pageContext.request.contextPath}/baoCaoKho"
                    class="list-group-item list-group-item-action">
                     Báo cáo kho
                 </a>
