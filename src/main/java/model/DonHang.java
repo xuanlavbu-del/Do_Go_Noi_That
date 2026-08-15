@@ -1,69 +1,66 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class DonHang implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    private int maDonHang;
-    private int maTaiKhoan;
-    private Date ngayDat;
+    private int maDon;
+    private int maKhachHang;
+    private Timestamp ngayDat;
     private double tongTien;
     private String trangThai;
+    private String diaChiGiao;
+    private String ghiChu;
 
-    // Constructor mặc định
     public DonHang() {
     }
 
-    // Constructor đầy đủ
-    public DonHang(int maDonHang,
-                   int maTaiKhoan,
-                   Date ngayDat,
-                   double tongTien,
-                   String trangThai) {
+    public DonHang(int maDon, int maKhachHang, Timestamp ngayDat,
+                   double tongTien, String trangThai,
+                   String diaChiGiao, String ghiChu) {
 
-        this.maDonHang = maDonHang;
-        this.maTaiKhoan = maTaiKhoan;
+        this.maDon = maDon;
+        this.maKhachHang = maKhachHang;
         this.ngayDat = ngayDat;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
+        this.diaChiGiao = diaChiGiao;
+        this.ghiChu = ghiChu;
     }
 
-    // Constructor thêm mới
-    public DonHang(int maTaiKhoan,
-                   Date ngayDat,
-                   double tongTien,
-                   String trangThai) {
+    public DonHang(int maKhachHang, double tongTien,
+                   String trangThai, String diaChiGiao,
+                   String ghiChu) {
 
-        this.maTaiKhoan = maTaiKhoan;
-        this.ngayDat = ngayDat;
+        this.maKhachHang = maKhachHang;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
+        this.diaChiGiao = diaChiGiao;
+        this.ghiChu = ghiChu;
     }
 
-    public int getMaDonHang() {
-        return maDonHang;
+    public int getMaDon() {
+        return maDon;
     }
 
-    public void setMaDonHang(int maDonHang) {
-        this.maDonHang = maDonHang;
+    public void setMaDon(int maDon) {
+        this.maDon = maDon;
     }
 
-    public int getMaTaiKhoan() {
-        return maTaiKhoan;
+    public int getMaKhachHang() {
+        return maKhachHang;
     }
 
-    public void setMaTaiKhoan(int maTaiKhoan) {
-        this.maTaiKhoan = maTaiKhoan;
+    public void setMaKhachHang(int maKhachHang) {
+        this.maKhachHang = maKhachHang;
     }
 
-    public Date getNgayDat() {
+    public Timestamp getNgayDat() {
         return ngayDat;
     }
 
-    public void setNgayDat(Date ngayDat) {
+    public void setNgayDat(Timestamp ngayDat) {
         this.ngayDat = ngayDat;
     }
 
@@ -83,24 +80,19 @@ public class DonHang implements Serializable {
         this.trangThai = trangThai;
     }
 
-    // Kiểm tra đơn hàng đã giao
-    public boolean daGiao() {
-        return "DA_GIAO".equalsIgnoreCase(trangThai);
+    public String getDiaChiGiao() {
+        return diaChiGiao;
     }
 
-    // Kiểm tra đơn hàng đang xử lý
-    public boolean dangXuLy() {
-        return "DANG_XU_LY".equalsIgnoreCase(trangThai);
+    public void setDiaChiGiao(String diaChiGiao) {
+        this.diaChiGiao = diaChiGiao;
     }
 
-    @Override
-    public String toString() {
-        return "DonHang{" +
-                "maDonHang=" + maDonHang +
-                ", maTaiKhoan=" + maTaiKhoan +
-                ", ngayDat=" + ngayDat +
-                ", tongTien=" + tongTien +
-                ", trangThai='" + trangThai + '\'' +
-                '}';
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
     }
 }

@@ -1,11 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="java.util.List" %>
-<%@ page import="model.SanPham" %>
-<%@ page import="model.DanhMuc" %>
+<%@ page import="java.util.List"%>
+<%@ page import="model.SanPham"%>
+<%@ page import="model.DanhMuc"%>
 
 <!DOCTYPE html>
-
 <html lang="vi">
 
 <head>
@@ -15,13 +13,14 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Sản phẩm theo danh mục - Nội Thất Nguyên Khôi</title>
+    <title>Sản phẩm - Nội Thất Nguyên Khôi</title>
 
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
     <style>
 
@@ -36,7 +35,9 @@
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
+
             background: #f8f8f8;
+
             color: #333;
         }
 
@@ -49,12 +50,13 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            HEADER
-        ========================================== */
+        ===================================================== */
 
         .header {
             background: #fff;
+
             border-bottom: 1px solid #ddd;
 
             position: sticky;
@@ -72,8 +74,10 @@
 
         .logo {
             color: #8b5e34;
+
             font-size: 27px;
             font-weight: bold;
+
             white-space: nowrap;
         }
 
@@ -97,6 +101,7 @@
             height: 42px;
 
             border: 1px solid #ddd;
+
             border-radius: 25px;
 
             padding: 0 52px 0 20px;
@@ -118,9 +123,11 @@
             height: 34px;
 
             border: none;
+
             border-radius: 50%;
 
             background: #8b5e34;
+
             color: white;
 
             cursor: pointer;
@@ -131,11 +138,13 @@
         }
 
 
-        /* ACCOUNT */
+        /* USER */
 
         .header-icon {
             color: #333;
+
             font-size: 18px;
+
             margin-left: 18px;
         }
 
@@ -164,16 +173,18 @@
             font-size: 11px;
 
             text-align: center;
+
             line-height: 18px;
         }
 
 
-        /* ==========================================
+        /* =====================================================
            NAVBAR
-        ========================================== */
+        ===================================================== */
 
         .navbar-custom {
             background: #8b5e34;
+
             padding: 0;
         }
 
@@ -195,9 +206,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            PAGE HEADER
-        ========================================== */
+        ===================================================== */
 
         .page-header {
             background: white;
@@ -239,9 +250,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            BREADCRUMB
-        ========================================== */
+        ===================================================== */
 
         .breadcrumb {
             background: transparent;
@@ -262,18 +273,18 @@
         }
 
 
-        /* ==========================================
-           PRODUCT SECTION
-        ========================================== */
+        /* =====================================================
+           PRODUCT AREA
+        ===================================================== */
 
         .product-section {
             padding: 50px 0 70px;
         }
 
 
-        /* ==========================================
-           CATEGORY BOX
-        ========================================== */
+        /* =====================================================
+           CATEGORY
+        ===================================================== */
 
         .category-box {
             background: white;
@@ -328,13 +339,14 @@
         .category-item:hover,
         .category-item.active {
             background: #8b5e34;
+
             color: white;
         }
 
 
-        /* ==========================================
+        /* =====================================================
            SECTION TITLE
-        ========================================== */
+        ===================================================== */
 
         .section-title {
             display: flex;
@@ -375,9 +387,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            PRODUCT CARD
-        ========================================== */
+        ===================================================== */
 
         .product-card {
             height: 100%;
@@ -399,17 +411,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,.15);
         }
 
-
-        /* IMAGE */
-
-        .product-image-box {
-            height: 240px;
-
-            overflow: hidden;
-
-            background: #f2f2f2;
-        }
-
         .product-image {
             width: 100%;
 
@@ -428,8 +429,13 @@
             transform: scale(1.04);
         }
 
+        .product-image-box {
+            height: 240px;
 
-        /* INFO */
+            overflow: hidden;
+
+            background: #f2f2f2;
+        }
 
         .product-info {
             padding: 18px;
@@ -475,9 +481,6 @@
             line-height: 1.5;
         }
 
-
-        /* DETAIL BUTTON */
-
         .btn-detail {
             display: inline-block;
 
@@ -499,9 +502,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            EMPTY
-        ========================================== */
+        ===================================================== */
 
         .empty-box {
             background: white;
@@ -534,9 +537,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            FOOTER
-        ========================================== */
+        ===================================================== */
 
         .footer {
             background: #292929;
@@ -589,9 +592,9 @@
         }
 
 
-        /* ==========================================
+        /* =====================================================
            RESPONSIVE
-        ========================================== */
+        ===================================================== */
 
         @media(max-width: 768px) {
 
@@ -628,13 +631,15 @@
 <body>
 
 
-<!-- =================================================
+<!-- =====================================================
      HEADER
-================================================= -->
+===================================================== -->
 
 <header class="header">
 
+
     <div class="container header-top">
+
 
         <div class="row align-items-center">
 
@@ -659,17 +664,13 @@
 
             <div class="col-md-6 d-none d-md-block">
 
-                <form action="${pageContext.request.contextPath}/sanPham"
+                <form action="${pageContext.request.contextPath}/timKiemSanPham"
                       method="get">
-
-                    <input type="hidden"
-                           name="hanhDong"
-                           value="timKiem">
 
                     <div class="search-box">
 
                         <input type="text"
-                               name="tuKhoa"
+                               name="keyword"
                                placeholder="Tìm kiếm sản phẩm...">
 
                         <button type="submit">
@@ -689,15 +690,18 @@
 
             <div class="col-md-3 col-6 text-right">
 
+
                 <%
                     String hoTen =
                             (String) session.getAttribute("hoTen");
                 %>
 
+
                 <%
                     if (hoTen != null
                             && !hoTen.trim().isEmpty()) {
                 %>
+
 
                 <div class="dropdown d-inline-block">
 
@@ -711,7 +715,9 @@
 
                     </a>
 
+
                     <div class="dropdown-menu dropdown-menu-right">
+
 
                         <a class="dropdown-item"
                            href="${pageContext.request.contextPath}/thongTinTaiKhoan">
@@ -722,6 +728,7 @@
 
                         </a>
 
+
                         <a class="dropdown-item"
                            href="${pageContext.request.contextPath}/donHang">
 
@@ -731,7 +738,9 @@
 
                         </a>
 
+
                         <div class="dropdown-divider"></div>
+
 
                         <a class="dropdown-item text-danger"
                            href="${pageContext.request.contextPath}/dangXuat">
@@ -742,13 +751,16 @@
 
                         </a>
 
+
                     </div>
 
                 </div>
 
+
                 <%
                 } else {
                 %>
+
 
                 <a href="${pageContext.request.contextPath}/dangNhap"
                    class="header-icon">
@@ -758,6 +770,7 @@
                     Đăng nhập
 
                 </a>
+
 
                 <%
                     }
@@ -780,6 +793,7 @@
 
                 </a>
 
+
             </div>
 
         </div>
@@ -787,11 +801,16 @@
     </div>
 
 
-    <!-- NAVBAR -->
+
+    <!-- =================================================
+         NAVBAR
+    ================================================== -->
 
     <nav class="navbar navbar-expand-md navbar-custom">
 
+
         <div class="container">
+
 
             <button class="navbar-toggler"
                     type="button"
@@ -802,10 +821,13 @@
 
             </button>
 
+
             <div class="collapse navbar-collapse"
                  id="mainMenu">
 
+
                 <ul class="navbar-nav mx-auto">
+
 
                     <li class="nav-item">
 
@@ -820,6 +842,7 @@
 
                     </li>
 
+
                     <li class="nav-item">
 
                         <a class="nav-link active"
@@ -832,6 +855,7 @@
                         </a>
 
                     </li>
+
 
                     <li class="nav-item">
 
@@ -846,6 +870,7 @@
 
                     </li>
 
+
                     <li class="nav-item">
 
                         <a class="nav-link"
@@ -858,6 +883,7 @@
                         </a>
 
                     </li>
+
 
                     <li class="nav-item">
 
@@ -872,6 +898,7 @@
 
                     </li>
 
+
                 </ul>
 
             </div>
@@ -883,42 +910,33 @@
 </header>
 
 
-<!-- =================================================
+
+<!-- =====================================================
      PAGE HEADER
-================================================= -->
+===================================================== -->
 
 <section class="page-header">
 
+
     <div class="container">
 
-        <%
-            DanhMuc danhMuc =
-                    (DanhMuc) request.getAttribute("danhMuc");
-
-            String tenDanhMuc = "Tất cả sản phẩm";
-
-            if (danhMuc != null
-                    && danhMuc.getTenDanhMuc() != null
-                    && !danhMuc.getTenDanhMuc().trim().isEmpty()) {
-
-                tenDanhMuc =
-                        danhMuc.getTenDanhMuc();
-            }
-        %>
 
         <h1>
 
-            <%= tenDanhMuc %>
+            SẢN PHẨM
 
         </h1>
 
+
         <p>
 
-            Khám phá các sản phẩm thuộc danh mục này
+            Khám phá các sản phẩm nội thất chất lượng cao
 
         </p>
 
+
         <ol class="breadcrumb">
+
 
             <li class="breadcrumb-item">
 
@@ -930,44 +948,41 @@
 
             </li>
 
-            <li class="breadcrumb-item">
-
-                <a href="${pageContext.request.contextPath}/sanPham">
-
-                    Sản phẩm
-
-                </a>
-
-            </li>
 
             <li class="breadcrumb-item active">
 
-                <%= tenDanhMuc %>
+                Sản phẩm
 
             </li>
 
+
         </ol>
+
 
     </div>
 
 </section>
 
 
-<!-- =================================================
+
+<!-- =====================================================
      PRODUCT SECTION
-================================================= -->
+===================================================== -->
 
 <section class="product-section">
+
 
     <div class="container">
 
 
         <%
+
             List<SanPham> danhSachSanPham =
                     (List<SanPham>)
                             request.getAttribute(
                                     "danhSachSanPham"
                             );
+
 
             List<DanhMuc> danhSachDanhMuc =
                     (List<DanhMuc>)
@@ -975,12 +990,15 @@
                                     "danhSachDanhMuc"
                             );
 
+
             Object maDanhMucObj =
                     request.getAttribute(
                             "maDanhMuc"
                     );
 
+
             int maDanhMuc = 0;
+
 
             if (maDanhMucObj != null) {
 
@@ -999,18 +1017,22 @@
 
             }
 
+
             int soLuong =
                     danhSachSanPham != null
                             ? danhSachSanPham.size()
                             : 0;
+
         %>
 
 
-        <!-- =========================================
-             DANH MỤC
-        ========================================== -->
+
+        <!-- =================================================
+             CATEGORY
+        ================================================== -->
 
         <div class="category-box">
+
 
             <div class="category-title">
 
@@ -1020,13 +1042,15 @@
 
             </div>
 
+
             <div class="category-list">
 
 
-                <!-- TẤT CẢ -->
+                <!-- ALL -->
 
                 <a href="${pageContext.request.contextPath}/sanPham"
-                   class="category-item">
+                   class="category-item
+                   <%= maDanhMuc == 0 ? "active" : "" %>">
 
                     Tất cả sản phẩm
 
@@ -1034,12 +1058,16 @@
 
 
                 <%
+
                     if (danhSachDanhMuc != null
                             && !danhSachDanhMuc.isEmpty()) {
 
+
                         for (DanhMuc dm :
                                 danhSachDanhMuc) {
+
                 %>
+
 
                 <a href="${pageContext.request.contextPath}/sanPham?maDanhMuc=<%= dm.getMaDanhMuc() %>"
                    class="category-item
@@ -1051,31 +1079,56 @@
 
                 </a>
 
+
                 <%
+
                         }
+
                     }
+
                 %>
+
 
             </div>
 
         </div>
 
 
-        <!-- =========================================
+
+        <!-- =================================================
              TITLE
-        ========================================== -->
+        ================================================== -->
 
         <div class="section-title">
 
+
             <div>
+
 
                 <h2>
 
                     <i class="fas fa-couch"></i>
 
-                    <%= tenDanhMuc %>
+
+                    <%
+                        if (maDanhMuc > 0) {
+                    %>
+
+                    Sản phẩm theo danh mục
+
+                    <%
+                    } else {
+                    %>
+
+                    Tất cả sản phẩm
+
+                    <%
+                        }
+                    %>
+
 
                 </h2>
+
 
                 <div class="product-count">
 
@@ -1089,38 +1142,48 @@
 
                 </div>
 
+
             </div>
+
 
         </div>
 
 
-        <!-- =========================================
+
+        <!-- =================================================
              PRODUCT LIST
-        ========================================== -->
+        ================================================== -->
 
         <div class="row">
 
 
             <%
+
                 if (danhSachSanPham != null
                         && !danhSachSanPham.isEmpty()) {
+
 
                     for (SanPham sp :
                             danhSachSanPham) {
 
+
                         String hinhAnh =
                                 sp.getHinhAnh();
+
 
                         if (hinhAnh == null
                                 || hinhAnh.trim().isEmpty()) {
 
                             hinhAnh =
                                     "default-product.jpg";
+
                         }
+
             %>
 
 
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+
 
                 <div class="product-card">
 
@@ -1129,11 +1192,13 @@
 
                     <div class="product-image-box">
 
+
                         <img src="${pageContext.request.contextPath}/images/sanpham/<%= hinhAnh %>"
                              class="product-image"
                              alt="<%= sp.getTenSanPham() %>"
                              loading="lazy"
                              onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/images/default-product.jpg';">
+
 
                     </div>
 
@@ -1141,6 +1206,7 @@
                     <!-- INFO -->
 
                     <div class="product-info">
+
 
                         <div class="product-name">
 
@@ -1171,14 +1237,38 @@
                         </div>
 
 
-                        <a href="${pageContext.request.contextPath}/chiTietSanPham?id=<%= sp.getMaSanPham() %>"
-                           class="btn-detail">
+                        <div class="d-flex justify-content-between align-items-center">
 
-                            <i class="fas fa-eye"></i>
+                            <a href="${pageContext.request.contextPath}/chiTietSanPham?id=<%= sp.getMaSanPham() %>"
+                               class="btn-detail">
 
-                            Xem chi tiết
+                                <i class="fas fa-eye"></i>
 
-                        </a>
+                                Xem chi tiết
+
+                            </a>
+
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/gioHang"
+                                  style="display:inline;">
+
+                                <input type="hidden"
+                                       name="maSanPham"
+                                       value="<%= sp.getMaSanPham() %>">
+
+                                <button type="submit"
+                                        class="btn btn-sm btn-success">
+
+                                    <i class="fas fa-cart-plus"></i>
+
+                                    Thêm giỏ
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
 
                     </div>
 
@@ -1188,25 +1278,31 @@
 
 
             <%
+
                 }
 
             } else {
+
             %>
 
 
-            <!-- KHÔNG CÓ SẢN PHẨM -->
+            <!-- EMPTY -->
 
             <div class="col-12">
 
+
                 <div class="empty-box">
 
+
                     <i class="fas fa-couch"></i>
+
 
                     <h4>
 
                         Không có sản phẩm
 
                     </h4>
+
 
                     <p>
 
@@ -1215,6 +1311,7 @@
 
                     </p>
 
+
                     <a href="${pageContext.request.contextPath}/sanPham"
                        class="category-item">
 
@@ -1222,40 +1319,50 @@
 
                     </a>
 
+
                 </div>
 
             </div>
 
 
             <%
+
                 }
+
             %>
 
+
         </div>
+
 
     </div>
 
 </section>
 
 
-<!-- =================================================
+
+<!-- =====================================================
      FOOTER
-================================================= -->
+===================================================== -->
 
 <footer class="footer">
 
+
     <div class="container">
+
 
         <div class="row">
 
 
             <div class="col-md-4 mb-4">
 
+
                 <h5>
 
                     NỘI THẤT NGUYÊN KHÔI
 
                 </h5>
+
 
                 <p>
 
@@ -1265,16 +1372,19 @@
 
                 </p>
 
+
             </div>
 
 
             <div class="col-md-4 mb-4">
+
 
                 <h5>
 
                     LIÊN KẾT
 
                 </h5>
+
 
                 <a href="${pageContext.request.contextPath}/trangChu"
                    class="footer-link">
@@ -1285,6 +1395,7 @@
 
                 </a>
 
+
                 <a href="${pageContext.request.contextPath}/sanPham"
                    class="footer-link">
 
@@ -1293,6 +1404,7 @@
                     Sản phẩm
 
                 </a>
+
 
                 <a href="${pageContext.request.contextPath}/trangChu#gioi-thieu"
                    class="footer-link">
@@ -1303,6 +1415,7 @@
 
                 </a>
 
+
                 <a href="${pageContext.request.contextPath}/trangChu#lien-he"
                    class="footer-link">
 
@@ -1312,16 +1425,19 @@
 
                 </a>
 
+
             </div>
 
 
             <div class="col-md-4 mb-4">
+
 
                 <h5>
 
                     LIÊN HỆ
 
                 </h5>
+
 
                 <p>
 
@@ -1331,6 +1447,7 @@
 
                 </p>
 
+
                 <p>
 
                     <i class="fas fa-phone"></i>
@@ -1338,6 +1455,7 @@
                     0123 456 789
 
                 </p>
+
 
                 <p>
 
@@ -1347,6 +1465,7 @@
 
                 </p>
 
+
                 <p>
 
                     <i class="fas fa-clock"></i>
@@ -1355,7 +1474,9 @@
 
                 </p>
 
+
             </div>
+
 
         </div>
 
@@ -1367,59 +1488,16 @@
 
         </div>
 
+
     </div>
 
 </footer>
 
 
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
-<script>
-
-    function updateCartCount() {
-
-        let cart =
-            JSON.parse(
-                localStorage.getItem("cart")
-            ) || [];
-
-        let total = 0;
-
-        cart.forEach(function(item) {
-
-            total += parseInt(
-                item.quantity ||
-                item.soLuong ||
-                1
-            );
-
-        });
-
-        const cartCount =
-            document.getElementById(
-                "cartCount"
-            );
-
-        if (cartCount) {
-
-            cartCount.innerText =
-                total;
-
-        }
-
-    }
-
-    updateCartCount();
-
-    window.addEventListener(
-        "storage",
-        updateCartCount
-    );
-
-</script>
 
 
 </body>

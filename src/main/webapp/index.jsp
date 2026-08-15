@@ -2,14 +2,15 @@
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="model.SanPham"%>
-
+<%@ page import="model.DanhMuc"%>
+<%@ page import="model.GioHang"%>
+<%@ page import="dao.GioHangDAO"%>
 <!DOCTYPE html>
 
 <html lang="vi">
 
 <head>
 
-    ```
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -457,7 +458,38 @@
             background: #8b5e34;
             color: white;
         }
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
 
+        .category-header h2 {
+            margin: 0;
+            color: #8b5e34;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .btn-view-all {
+            color: #8b5e34;
+            border: 1px solid #8b5e34;
+            padding: 9px 18px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-view-all:hover {
+            background: #8b5e34;
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-view-all i {
+            margin-left: 5px;
+        }
         /* ==================================================
            LIÊN HỆ
         ================================================== */
@@ -589,7 +621,7 @@
         }
 
     </style>
-    ```
+
 
 </head>
 
@@ -601,7 +633,7 @@
 
 <header class="header">
 
-    ```
+
     <div class="container header-top">
 
         <div class="row align-items-center">
@@ -610,7 +642,7 @@
 
             <div class="col-md-3 col-6">
 
-                <a href="index.jsp" class="logo">
+                <a href="${pageContext.request.contextPath}/trangChu" class="logo">
 
                     <i class="fas fa-couch"></i>
                     NGUYÊN KHÔI
@@ -649,15 +681,152 @@
 
             <div class="col-md-3 col-6 text-right">
 
-                <a href="dangNhap.jsp"
+                <%
+                    String hoTen =
+                            (String) session.getAttribute("hoTen");
+                %>
+
+                <%
+                    if (hoTen != null &&
+                            !hoTen.trim().isEmpty()) {
+                %>
+
+                <!-- ĐÃ ĐĂNG NHẬP -->
+
+                <div class="dropdown d-inline-block">
+
+                    <a href="#"
+                       class="header-icon dropdown-toggle"
+                       data-toggle="dropdown">
+
+                        <i class="fas fa-user-circle"></i>
+
+                        Xin chào,
+                        <strong>
+                            <%= hoTen %>
+                        </strong>
+
+                    </a>
+
+
+                    <div class="dropdown-menu dropdown-menu-right">
+
+                        <a class="dropdown-item"
+                           href="${pageContext.request.contextPath}/thongTinTaiKhoan">
+
+                            <i class="fas fa-user"></i>
+                            Thông tin tài khoản
+
+                        </a>
+
+
+                        <a class="dropdown-item"
+                           href="${pageContext.request.contextPath}/donHang">
+
+                            <i class="fas fa-shopping-bag"></i>
+                            Đơn hàng của tôi
+
+                        </a>
+
+
+                        <div class="dropdown-divider"></div>
+
+
+                        <a class="dropdown-item text-danger"
+                           href="${pageContext.request.contextPath}/dangXuat">
+
+                            <i class="fas fa-sign-out-alt"></i>
+                            Đăng xuất
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <%
+                } else {
+                %>
+
+                <!-- CHƯA ĐĂNG NHẬP -->
+
+                <a href="${pageContext.request.contextPath}/dangNhap"
                    class="header-icon">
 
                     <i class="fas fa-user"></i>
 
+                    Đăng nhập
+
                 </a>
 
+                <%
+                    }
+                %>
 
-                <a href="gioHang.jsp"
+
+                <%
+                    /*
+                     * Số lượng giỏ hàng:
+                     *
+                     * - Chưa đăng nhập:
+                     *   lấy từ session "gioHangKhach".
+                     *
+                     * - Đã đăng nhập:
+                     *   lấy trực tiếp từ bảng gio_hang
+                     *   theo maTaiKhoan.
+                     *
+                     * Không còn sử dụng localStorage("cart").
+                     */
+
+                    int tongSoLuongGioHang = 0;
+
+                    Object maTaiKhoanObj =
+                            session.getAttribute("maTaiKhoan");
+
+                    if (maTaiKhoanObj != null) {
+
+                        try {
+
+                            int maTaiKhoan =
+                                    Integer.parseInt(
+                                            maTaiKhoanObj.toString()
+                                    );
+
+                            GioHangDAO gioHangDAO =
+                                    new GioHangDAO();
+
+                            tongSoLuongGioHang =
+                                    gioHangDAO.demSoLuong(
+                                            maTaiKhoan
+                                    );
+
+                        } catch (Exception e) {
+
+                            e.printStackTrace();
+
+                            tongSoLuongGioHang = 0;
+                        }
+
+                    } else {
+
+                        List<GioHang> gioHangKhach =
+                                (List<GioHang>)
+                                        session.getAttribute(
+                                                "gioHangKhach"
+                                        );
+
+                        if (gioHangKhach != null) {
+
+                            for (GioHang item : gioHangKhach) {
+
+                                tongSoLuongGioHang +=
+                                        item.getSoLuong();
+                            }
+                        }
+                    }
+                %>
+
+                <a href="${pageContext.request.contextPath}/gioHang"
                    class="header-icon position-relative">
 
                     <i class="fas fa-shopping-cart"></i>
@@ -665,9 +834,9 @@
                     <span id="cartCount"
                           class="cart-count">
 
-                    0
+                        <%= tongSoLuongGioHang %>
 
-                </span>
+                    </span>
 
                 </a>
 
@@ -702,7 +871,7 @@
                     <li class="nav-item">
 
                         <a class="nav-link"
-                           href="index.jsp">
+                           href="${pageContext.request.contextPath}/trangChu">
 
                             <i class="fas fa-home"></i>
                             Trang chủ
@@ -766,7 +935,7 @@
         </div>
 
     </nav>
-    ```
+
 
 </header>
 
@@ -776,7 +945,7 @@
 
 <section class="banner-section">
 
-    ```
+
     <div id="bannerCarousel"
          class="carousel slide"
          data-ride="carousel"
@@ -960,7 +1129,7 @@
         </a>
 
     </div>
-    ```
+
 
 </section>
 
@@ -971,7 +1140,7 @@
 <section class="section about-section"
          id="gioi-thieu">
 
-    ```
+
     <div class="container">
 
         <div class="section-title">
@@ -1071,7 +1240,7 @@
         </div>
 
     </div>
-    ```
+
 
 </section>
 
@@ -1082,7 +1251,7 @@
 <section class="section history-section"
          id="lich-su">
 
-    ```
+
     <div class="container">
 
         <div class="section-title">
@@ -1193,7 +1362,6 @@
         </div>
 
     </div>
-    ```
 
 </section>
 
@@ -1204,7 +1372,6 @@
 <section class="section product-section"
          id="san-pham">
 
-    ```
     <div class="container">
 
         <div class="section-title">
@@ -1229,7 +1396,7 @@
              *
              * Kiểu dữ liệu:
              *
-             * Map<String, List<SanPham>>
+             * Map<Integer, List<SanPham>>
              *
              * Key:
              *     Tên danh mục
@@ -1238,8 +1405,8 @@
              *     Danh sách sản phẩm thuộc danh mục
              */
 
-            Map<String, List<SanPham>> sanPhamTheoDanhMuc =
-                    (Map<String, List<SanPham>>)
+            Map<Integer, List<SanPham>> sanPhamTheoDanhMuc =
+                    (Map<Integer, List<SanPham>>)
                             request.getAttribute("sanPhamTheoDanhMuc");
 
 
@@ -1247,11 +1414,11 @@
                     && !sanPhamTheoDanhMuc.isEmpty()) {
 
 
-                for (Map.Entry<String, List<SanPham>> entry
+                for (Map.Entry<Integer, List<SanPham>> entry
                         : sanPhamTheoDanhMuc.entrySet()) {
 
 
-                    String tenDanhMuc = entry.getKey();
+                    Integer maDanhMuc = entry.getKey();
 
                     List<SanPham> danhSachSanPham =
                             entry.getValue();
@@ -1269,17 +1436,18 @@
 
                     <h3>
                         <i class="fas fa-couch"></i>
-                        <%= tenDanhMuc %>
+                        <%= maDanhMuc %>
                     </h3>
 
                 </div>
 
                 <div class="col-auto">
 
-                    <a href="sanPham?danhMuc=<%= tenDanhMuc %>"
-                       class="btn btn-view-all">
+                    <a href="${pageContext.request.contextPath}/sanPham?maDanhMuc=<%= maDanhMuc %>"
+                       class="btn-view-all">
 
                         Xem tất cả
+                        <i class="fas fa-arrow-right"></i>
 
                     </a>
 
@@ -1335,12 +1503,13 @@
                 <div class="product-card">
 
 
-                    <img src="images/sanpham/<%= hinhAnh %>"
-                         class="product-img"
+                    <img src="${pageContext.request.contextPath}/images/sanpham/<%= sp.getHinhAnh() %>"
                          alt="<%= sp.getTenSanPham() %>"
-                         onerror="
-                        this.src='images/default-product.jpg';
-                     ">
+                         class="product-img">
+                    alt="<%= sp.getTenSanPham() %>"
+                    onerror="
+                    this.src='images/default-product.jpg';
+                    ">
 
 
                     <div class="product-info">
@@ -1438,7 +1607,6 @@
 
 
     </div>
-    ```
 
 </section>
 
@@ -1449,7 +1617,7 @@
 <section class="section contact-section"
          id="lien-he">
 
-    ```
+
     <div class="container">
 
         <div class="section-title">
@@ -1600,7 +1768,6 @@
         </div>
 
     </div>
-    ```
 
 </section>
 
@@ -1610,7 +1777,7 @@
 
 <footer class="footer">
 
-    ```
+
     <div class="container">
 
         <div class="row">
@@ -1706,7 +1873,7 @@
         </div>
 
     </div>
-    ```
+
 
 </footer>
 
@@ -1716,54 +1883,20 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 
     /*
-     * Cập nhật số lượng sản phẩm trong giỏ hàng.
-     */
-
-    function updateCartCount() {
-
-        let cart =
-            JSON.parse(
-                localStorage.getItem("cart")
-            );
-
-        if (!cart) {
-            cart = [];
-        }
-
-        let total = 0;
-
-        cart.forEach(function(item) {
-
-            total += parseInt(
-                item.quantity ||
-                item.soLuong ||
-                1
-            );
-
-        });
-
-        document.getElementById("cartCount")
-            .innerText = total;
-
-    }
-
-
-    updateCartCount();
-
-
-    /*
-     * Tự động chạy banner.
+     * Không dùng localStorage("cart").
      *
-     * Bootstrap Carousel đã được thiết lập:
+     * Số lượng giỏ hàng đã được JSP lấy từ:
+     * - session "gioHangKhach" nếu chưa đăng nhập;
+     * - bảng gio_hang nếu đã đăng nhập.
      *
-     * data-interval="3500"
-     *
-     * => chuyển ảnh sau mỗi 3,5 giây.
+     * Bootstrap Carousel tự động chuyển banner
+     * theo cấu hình data-interval.
      */
 
 </script>

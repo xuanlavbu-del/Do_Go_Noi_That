@@ -6,68 +6,49 @@ public class ChiTietDonHang implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int maChiTiet;
-    private int maDonHang;
+    private int maCTDH;
+    private int maDon;
     private int maSanPham;
-
-    private String tenSanPham;
-    private String hinhAnh;
-
-    private double donGia;
     private int soLuong;
+    private double donGia;
+    private double thanhTien;
 
-    // Constructor mặc định
     public ChiTietDonHang() {
     }
 
-    // Constructor đầy đủ
-    public ChiTietDonHang(int maChiTiet,
-                          int maDonHang,
-                          int maSanPham,
-                          String tenSanPham,
-                          String hinhAnh,
-                          double donGia,
-                          int soLuong) {
-
-        this.maChiTiet = maChiTiet;
-        this.maDonHang = maDonHang;
+    public ChiTietDonHang(int maCTDH, int maDon, int maSanPham,
+                          int soLuong, double donGia, double thanhTien) {
+        this.maCTDH = maCTDH;
+        this.maDon = maDon;
         this.maSanPham = maSanPham;
-        this.tenSanPham = tenSanPham;
-        this.hinhAnh = hinhAnh;
-        this.donGia = donGia;
         this.soLuong = soLuong;
+        this.donGia = donGia;
+        this.thanhTien = thanhTien;
     }
 
-    // Constructor thêm mới
-    public ChiTietDonHang(int maDonHang,
-                          int maSanPham,
-                          String tenSanPham,
-                          String hinhAnh,
-                          double donGia,
-                          int soLuong) {
-
-        this.maDonHang = maDonHang;
+    public ChiTietDonHang(int maDon, int maSanPham,
+                          int soLuong, double donGia, double thanhTien) {
+        this.maDon = maDon;
         this.maSanPham = maSanPham;
-        this.tenSanPham = tenSanPham;
-        this.hinhAnh = hinhAnh;
-        this.donGia = donGia;
         this.soLuong = soLuong;
+        this.donGia = donGia;
+        this.thanhTien = thanhTien;
     }
 
-    public int getMaChiTiet() {
-        return maChiTiet;
+    public int getMaCTDH() {
+        return maCTDH;
     }
 
-    public void setMaChiTiet(int maChiTiet) {
-        this.maChiTiet = maChiTiet;
+    public void setMaCTDH(int maCTDH) {
+        this.maCTDH = maCTDH;
     }
 
-    public int getMaDonHang() {
-        return maDonHang;
+    public int getMaDon() {
+        return maDon;
     }
 
-    public void setMaDonHang(int maDonHang) {
-        this.maDonHang = maDonHang;
+    public void setMaDon(int maDon) {
+        this.maDon = maDon;
     }
 
     public int getMaSanPham() {
@@ -78,20 +59,12 @@ public class ChiTietDonHang implements Serializable {
         this.maSanPham = maSanPham;
     }
 
-    public String getTenSanPham() {
-        return tenSanPham;
+    public int getSoLuong() {
+        return soLuong;
     }
 
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
-    }
-
-    public String getHinhAnh() {
-        return hinhAnh;
-    }
-
-    public void setHinhAnh(String hinhAnh) {
-        this.hinhAnh = hinhAnh;
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
     public double getDonGia() {
@@ -102,30 +75,24 @@ public class ChiTietDonHang implements Serializable {
         this.donGia = donGia;
     }
 
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    // Thành tiền
     public double getThanhTien() {
-        return donGia * soLuong;
+        return thanhTien;
+    }
+
+    public void setThanhTien(double thanhTien) {
+        this.thanhTien = thanhTien;
     }
 
     @Override
     public String toString() {
         return "ChiTietDonHang{" +
-                "maChiTiet=" + maChiTiet +
-                ", maDonHang=" + maDonHang +
+                "maCTDH=" + maCTDH +
+                ", maDon=" + maDon +
                 ", maSanPham=" + maSanPham +
-                ", tenSanPham='" + tenSanPham + '\'' +
-                ", hinhAnh='" + hinhAnh + '\'' +
-                ", donGia=" + donGia +
                 ", soLuong=" + soLuong +
-                ", thanhTien=" + getThanhTien() +
+                ", donGia=" + donGia +
+                ", thanhTien=" + thanhTien +
                 '}';
     }
 }
+

@@ -122,6 +122,11 @@ public class DangNhapServlet extends HttpServlet {
                 taiKhoan.getHoTen()
         );
         session.setAttribute(
+                "tenDangNhap",
+                taiKhoan.getTenDangNhap()
+        );
+
+        session.setAttribute(
                 "vaiTro",
                 taiKhoan.getVaiTro()
         );
@@ -136,7 +141,7 @@ public class DangNhapServlet extends HttpServlet {
         } else {
             response.sendRedirect(
                     request.getContextPath()
-                            + "/index.jsp"
+                            + "/trangChu"
             );
         }
     }

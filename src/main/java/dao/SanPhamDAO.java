@@ -648,5 +648,112 @@ public class SanPhamDAO {
         return danhSach;
 
     }
+// ===============================
+// Lấy sản phẩm nổi bật theo danh mục
+// ===============================
+
+    public List<SanPham> laySanPhamNoiBatTheoDanhMuc(
+            int maDanhMuc,
+            int soLuong
+    ) {
+
+
+        List<SanPham> danhSach =
+                new ArrayList<>();
+
+
+        String sql =
+                """
+                SELECT *
+                FROM san_pham
+                WHERE ma_danh_muc=?
+                ORDER BY ma_san_pham DESC
+                LIMIT ?
+                """;
+
+
+        try (
+                Connection conn =
+                        KetNoiCSDL.getConnection();
+
+                PreparedStatement ps =
+                        conn.prepareStatement(sql)
+        ) {
+
+            // Mã danh mục
+            ps.setInt(
+                    1,
+                    maDanhMuc
+            );
+
+            // Số lượng sản phẩm cần lấy
+            ps.setInt(
+                    2,
+                    soLuong
+            );
+
+
+            ResultSet rs =
+                    ps.executeQuery();
+
+
+            while (rs.next()) {
+
+                SanPham sp =
+                        new SanPham();
+
+
+                sp.setMaSanPham(
+                        rs.getInt("ma_san_pham")
+                );
+
+
+                sp.setTenSanPham(
+                        rs.getString("ten_san_pham")
+                );
+
+
+                sp.setGia(
+                        rs.getDouble("gia")
+                );
+
+
+                sp.setSoLuong(
+                        rs.getInt("so_luong")
+                );
+
+
+                sp.setMoTa(
+                        rs.getString("mo_ta")
+                );
+
+
+                sp.setHinhAnh(
+                        rs.getString("hinh_anh")
+                );
+
+
+                sp.setMaDanhMuc(
+                        rs.getInt("ma_danh_muc")
+                );
+
+
+                danhSach.add(sp);
+
+            }
+
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+
+        return danhSach;
+
+
+    }
+
 
 }

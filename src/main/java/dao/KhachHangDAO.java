@@ -571,4 +571,73 @@ public class KhachHangDAO {
 
     }
 
+// ==========================================
+// Lấy khách hàng theo email
+// ==========================================
+
+    public KhachHang layKhachHangTheoEmail(String email) {
+
+        KhachHang khachHang = null;
+
+        String sql =
+                "SELECT * FROM KhachHang WHERE email = ? LIMIT 1";
+
+        try (
+                Connection conn =
+                        KetNoiCSDL.getConnection();
+
+                PreparedStatement ps =
+                        conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, email);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+
+                    khachHang = new KhachHang();
+
+                    khachHang.setMaKhachHang(
+                            rs.getInt("maKhachHang")
+                    );
+
+                    khachHang.setHoTen(
+                            rs.getString("hoTen")
+                    );
+
+                    khachHang.setGioiTinh(
+                            rs.getString("gioiTinh")
+                    );
+
+                    khachHang.setNgaySinh(
+                            rs.getDate("ngaySinh")
+                    );
+
+                    khachHang.setSoDienThoai(
+                            rs.getString("soDienThoai")
+                    );
+
+                    khachHang.setEmail(
+                            rs.getString("email")
+                    );
+
+                    khachHang.setDiaChi(
+                            rs.getString("diaChi")
+                    );
+
+                    khachHang.setNgayTao(
+                            rs.getTimestamp("ngayTao")
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return khachHang;
+    }
+
+
 }

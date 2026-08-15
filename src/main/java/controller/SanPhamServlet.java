@@ -1,114 +1,204 @@
 package controller;
 
-
 import dao.SanPhamDAO;
 import model.SanPham;
-
+import dao.DanhMucDAO;
+import model.DanhMuc;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
-
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
 
-
-
 @WebServlet("/sanPham")
 public class SanPhamServlet extends HttpServlet {
 
-
     private SanPhamDAO sanPhamDAO;
-
-
-
+    private DanhMucDAO danhMucDAO;
     @Override
-    public void init(){
+    public void init() {
+            sanPhamDAO = new SanPhamDAO();
+            danhMucDAO = new DanhMucDAO();
+            }
 
-        sanPhamDAO = new SanPhamDAO();
-
-    }
-
-
-
-
-    // =====================================
-    // GET
-    // =====================================
 
     @Override
     protected void doGet(
             HttpServletRequest request,
-            HttpServletResponse response
-    )
+            HttpServletResponse response)
             throws ServletException, IOException {
-
 
         request.setCharacterEncoding("UTF-8");
 
 
+        // =========================================
+        // LẤY THAM SỐ
+        // =========================================
 
         String hanhDong =
                 request.getParameter("hanhDong");
 
+        String maDanhMucParam =
+                request.getParameter("maDanhMuc");
 
 
+        // =========================================
+// XEM TẤT CẢ SẢN PHẨM THEO DANH MỤC
+//
+// URL:
+// /sanPham?maDanhMuc=4
+// =========================================
 
-        // -----------------------------
-        // Xem chi tiết sản phẩm
-        // -----------------------------
+        if (maDanhMucParam != null
+                && !maDanhMucParam.trim().isEmpty()) {
 
-        if("chiTiet".equals(hanhDong)){
+            try {
 
+                int maDanhMuc =
+                        Integer.parseInt(maDanhMucParam);
 
-            int maSanPham =
-                    Integer.parseInt(
-                            request.getParameter(
-                                    "maSanPham"
-                            )
-                    );
+                // Lấy toàn bộ sản phẩm thuộc danh mục
+                List<SanPham> danhSach =
+                        sanPhamDAO.laySanPhamTheoDanhMuc(
+                                maDanhMuc
+                        );
 
+                // Lấy thông tin danh mục hiện tại
+                DanhMuc danhMuc =
+                        danhMucDAO.getById(maDanhMuc);
 
+                // Lấy tất cả danh mục để hiển thị menu
+                List<DanhMuc> danhSachDanhMuc =
+                        danhMucDAO.getAll();
 
-            SanPham sanPham =
-                    sanPhamDAO.laySanPhamTheoMa(
-                            maSanPham
-                    );
+                request.setAttribute(
+                        "danhSachSanPham",
+                        danhSach
+                );
 
+                request.setAttribute(
+                        "danhSachDanhMuc",
+                        danhSachDanhMuc
+                );
 
+                request.setAttribute(
+                        "danhMuc",
+                        danhMuc
+                );
 
-            request.setAttribute(
-                    "sanPham",
-                    sanPham
-            );
+                request.setAttribute(
+                        "maDanhMuc",
+                        maDanhMuc
+                );
 
+                request.getRequestDispatcher(
+                        "/danhSachSanPham.jsp"
+                ).forward(
+                        request,
+                        response
+                );
 
-            request.getRequestDispatcher(
-                            "chiTietSanPham.jsp"
-                    )
-                    .forward(request,response);
+                return;
 
+            } catch (NumberFormatException e) {
 
+                response.sendRedirect(
+                        request.getContextPath()
+                                + "/sanPham"
+                );
 
+                return;
+            }
         }
 
 
+        // =========================================
+        // 2. XEM CHI TIẾT
+        //
+        // URL:
+        // /sanPham?hanhDong=chiTiet&maSanPham=4
+        // =========================================
+
+        if ("chiTiet".equals(hanhDong)) {
+
+            String maSanPhamParam =
+                    request.getParameter(
+                            "maSanPham"
+                    );
 
 
-        // -----------------------------
-        // Tìm kiếm
-        // -----------------------------
+            if (maSanPhamParam == null
+                    || maSanPhamParam.trim().isEmpty()) {
 
-        else if("timKiem".equals(hanhDong)){
+                response.sendRedirect(
+                        request.getContextPath()
+                                + "/sanPham"
+                );
+
+                return;
+            }
 
 
+            try {
+
+                int maSanPham =
+                        Integer.parseInt(
+                                maSanPhamParam
+                        );
+
+
+                SanPham sanPham =
+                        sanPhamDAO.laySanPhamTheoMa(
+                                maSanPham
+                        );
+
+
+                request.setAttribute(
+                        "sanPham",
+                        sanPham
+                );
+
+
+                request.getRequestDispatcher(
+                        "/chiTietSanPham.jsp"
+                ).forward(
+                        request,
+                        response
+                );
+
+
+                return;
+
+
+            } catch (NumberFormatException e) {
+
+                response.sendRedirect(
+                        request.getContextPath()
+                                + "/sanPham"
+                );
+
+                return;
+            }
+        }
+
+
+        // =========================================
+        // 3. TÌM KIẾM
+        //
+        // URL:
+        // /sanPham?hanhDong=timKiem&tuKhoa=...
+        // =========================================
+
+        if ("timKiem".equals(hanhDong)) {
 
             String tuKhoa =
                     request.getParameter(
                             "tuKhoa"
                     );
-
 
 
             List<SanPham> danhSach =
@@ -117,7 +207,6 @@ public class SanPhamServlet extends HttpServlet {
                     );
 
 
-
             request.setAttribute(
                     "danhSachSanPham",
                     danhSach
@@ -125,106 +214,129 @@ public class SanPhamServlet extends HttpServlet {
 
 
             request.getRequestDispatcher(
-                            "danhSachSanPham.jsp"
-                    )
-                    .forward(request,response);
+                    "/danhSachSanPham.jsp"
+            ).forward(
+                    request,
+                    response
+            );
 
 
-
+            return;
         }
 
 
+        // =========================================
+        // 4. LỌC DANH MỤC KIỂU CŨ
+        //
+        // URL:
+        // /sanPham?hanhDong=danhMuc&maDanhMuc=4
+        //
+        // Giữ lại để các link cũ vẫn hoạt động.
+        // =========================================
 
+        if ("danhMuc".equals(hanhDong)) {
 
-        // -----------------------------
-        // Lọc danh mục
-        // -----------------------------
-
-        else if("danhMuc".equals(hanhDong)){
-
-
-            int maDanhMuc =
-                    Integer.parseInt(
-                            request.getParameter(
-                                    "maDanhMuc"
-                            )
+            String maDanhMucCu =
+                    request.getParameter(
+                            "maDanhMuc"
                     );
 
 
+            if (maDanhMucCu != null
+                    && !maDanhMucCu.trim().isEmpty()) {
 
-            List<SanPham> danhSach =
-                    sanPhamDAO.laySanPhamTheoDanhMuc(
+                try {
+
+                    int maDanhMuc =
+                            Integer.parseInt(
+                                    maDanhMucCu
+                            );
+
+
+                    List<SanPham> danhSach =
+                            sanPhamDAO
+                                    .laySanPhamTheoDanhMuc(
+                                            maDanhMuc
+                                    );
+
+
+                    request.setAttribute(
+                            "danhSachSanPham",
+                            danhSach
+                    );
+
+
+                    request.setAttribute(
+                            "maDanhMuc",
                             maDanhMuc
                     );
 
 
+                } catch (NumberFormatException e) {
 
-            request.setAttribute(
-                    "danhSachSanPham",
-                    danhSach
-            );
+                    request.setAttribute(
+                            "danhSachSanPham",
+                            sanPhamDAO.getAll()
+                    );
 
+                }
 
-            request.getRequestDispatcher(
-                            "danhSachSanPham.jsp"
-                    )
-                    .forward(request,response);
+            } else {
 
+                request.setAttribute(
+                        "danhSachSanPham",
+                        sanPhamDAO.getAll()
+                );
 
-        }
-
-
-
-
-        // -----------------------------
-        // Mặc định
-        // -----------------------------
-
-        else {
-
-
-            List<SanPham> danhSach =
-                    sanPhamDAO.getAll();
-
-
-
-            request.setAttribute(
-                    "danhSachSanPham",
-                    danhSach
-            );
-
+            }
 
 
             request.getRequestDispatcher(
-                            "danhSachSanPham.jsp"
-                    )
-                    .forward(request,response);
+                    "/danhSachSanPham.jsp"
+            ).forward(
+                    request,
+                    response
+            );
 
 
+            return;
         }
 
 
+        // =========================================
+        // 5. MẶC ĐỊNH
+        //
+        // /sanPham
+        //
+        // Hiển thị tất cả sản phẩm
+        // =========================================
+
+        List<SanPham> danhSach =
+                sanPhamDAO.getAll();
+
+
+        request.setAttribute(
+                "danhSachSanPham",
+                danhSach
+        );
+
+
+        request.getRequestDispatcher(
+                "/danhSachSanPham.jsp"
+        ).forward(
+                request,
+                response
+        );
     }
 
-
-
-
-
-    // =====================================
-    // POST
-    // =====================================
 
     @Override
     protected void doPost(
             HttpServletRequest request,
-            HttpServletResponse response
-    )
+            HttpServletResponse response)
             throws ServletException, IOException {
 
-
-        doGet(request,response);
+        doGet(request, response);
 
     }
-
-
 }
