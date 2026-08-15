@@ -12,17 +12,71 @@ public class DonHangDAO {
     // ==============================
     // Chuyển ResultSet -> DonHang
     // ==============================
-    private DonHang mapResultSet(ResultSet rs) throws SQLException {
+    private DonHang mapResultSet(ResultSet rs)
+            throws SQLException {
 
-        DonHang donHang = new DonHang();
+        DonHang donHang =
+                new DonHang();
 
-        donHang.setMaDon(rs.getInt("ma_don"));
-        donHang.setMaKhachHang(rs.getInt("ma_khach_hang"));
-        donHang.setNgayDat(rs.getTimestamp("ngay_dat"));
-        donHang.setTongTien(rs.getDouble("tong_tien"));
-        donHang.setTrangThai(rs.getString("trang_thai"));
-        donHang.setDiaChiGiao(rs.getString("dia_chi_giao"));
-        donHang.setGhiChu(rs.getString("ghi_chu"));
+
+        donHang.setMaDon(
+                rs.getInt("ma_don")
+        );
+
+
+        donHang.setMaKhachHang(
+                rs.getInt("ma_khach_hang")
+        );
+
+
+        donHang.setNgayDat(
+                rs.getTimestamp("ngay_dat")
+        );
+
+
+        donHang.setTongTien(
+                rs.getDouble("tong_tien")
+        );
+
+
+        donHang.setTrangThai(
+                rs.getString("trang_thai")
+        );
+
+
+        donHang.setDiaChiGiao(
+                rs.getString("dia_chi_giao")
+        );
+
+
+        donHang.setGhiChu(
+                rs.getString("ghi_chu")
+        );
+
+
+        // ==============================
+        // THÔNG TIN THANH TOÁN
+        // ==============================
+
+        donHang.setPhuongThucThanhToan(
+                rs.getString("phuong_thuc_thanh_toan")
+        );
+
+
+        donHang.setTrangThaiThanhToan(
+                rs.getString("trang_thai_thanh_toan")
+        );
+
+
+        donHang.setNoiDungThanhToan(
+                rs.getString("noi_dung_thanh_toan")
+        );
+
+
+        donHang.setMaGiaoDich(
+                rs.getString("ma_giao_dich")
+        );
+
 
         return donHang;
     }
@@ -60,35 +114,96 @@ public class DonHangDAO {
 
     // ==============================
     // Thêm đơn hàng và lấy mã đơn
-    // ==============================
     public int themDonHangLayMa(DonHang donHang) {
 
-        String sql = "INSERT INTO don_hang " +
-                "(ma_khach_hang, tong_tien, trang_thai, dia_chi_giao, ghi_chu) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql =
+                "INSERT INTO don_hang " +
+                        "(ma_khach_hang, tong_tien, trang_thai, " +
+                        "dia_chi_giao, ghi_chu, " +
+                        "phuong_thuc_thanh_toan, " +
+                        "trang_thai_thanh_toan, " +
+                        "noi_dung_thanh_toan, " +
+                        "ma_giao_dich) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (
-                Connection conn = KetNoiCSDL.getConnection();
+                Connection conn =
+                        KetNoiCSDL.getConnection();
+
                 PreparedStatement ps =
-                        conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+                        conn.prepareStatement(
+                                sql,
+                                Statement.RETURN_GENERATED_KEYS
+                        )
         ) {
 
-            ps.setInt(1, donHang.getMaKhachHang());
-            ps.setDouble(2, donHang.getTongTien());
-            ps.setString(3, donHang.getTrangThai());
-            ps.setString(4, donHang.getDiaChiGiao());
-            ps.setString(5, donHang.getGhiChu());
+            ps.setInt(
+                    1,
+                    donHang.getMaKhachHang()
+            );
 
-            ps.executeUpdate();
+            ps.setDouble(
+                    2,
+                    donHang.getTongTien()
+            );
 
-            try (ResultSet rs = ps.getGeneratedKeys()) {
+            ps.setString(
+                    3,
+                    donHang.getTrangThai()
+            );
+
+            ps.setString(
+                    4,
+                    donHang.getDiaChiGiao()
+            );
+
+            ps.setString(
+                    5,
+                    donHang.getGhiChu()
+            );
+
+            ps.setString(
+                    6,
+                    donHang.getPhuongThucThanhToan()
+            );
+
+            ps.setString(
+                    7,
+                    donHang.getTrangThaiThanhToan()
+            );
+
+            ps.setString(
+                    8,
+                    donHang.getNoiDungThanhToan()
+            );
+
+            ps.setString(
+                    9,
+                    donHang.getMaGiaoDich()
+            );
+
+
+            int affectedRows =
+                    ps.executeUpdate();
+
+            if (affectedRows == 0) {
+                return 0;
+            }
+
+
+            try (
+                    ResultSet rs =
+                            ps.getGeneratedKeys()
+            ) {
 
                 if (rs.next()) {
+
                     return rs.getInt(1);
                 }
             }
 
         } catch (Exception e) {
+
             e.printStackTrace();
         }
 
@@ -186,6 +301,7 @@ public class DonHangDAO {
 
         return danhSach;
     }
+
 
 
     // ==============================
@@ -407,4 +523,169 @@ public class DonHangDAO {
 
         return 0;
     }
+
+    // =====================================================
+// CẬP NHẬT TRẠNG THÁI THANH TOÁN
+// =====================================================
+
+    public boolean capNhatTrangThaiThanhToan(
+            int maDon,
+            String trangThaiThanhToan) {
+
+        String sql =
+                "UPDATE don_hang " +
+                        "SET trang_thai_thanh_toan = ? " +
+                        "WHERE ma_don = ?";
+
+
+        try (
+                Connection conn =
+                        KetNoiCSDL.getConnection();
+
+                PreparedStatement ps =
+                        conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(
+                    1,
+                    trangThaiThanhToan
+            );
+
+            ps.setInt(
+                    2,
+                    maDon
+            );
+
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // =====================================================
+// XÁC NHẬN THANH TOÁN
+// =====================================================
+
+    public boolean xacNhanThanhToan(
+            int maDon,
+            String maGiaoDich) {
+
+        String sql =
+                "UPDATE don_hang " +
+                        "SET trang_thai_thanh_toan = ?, " +
+                        "ma_giao_dich = ? " +
+                        "WHERE ma_don = ? " +
+                        "AND trang_thai_thanh_toan = 'CHUA_THANH_TOAN'";
+
+
+        try (
+                Connection conn =
+                        KetNoiCSDL.getConnection();
+
+                PreparedStatement ps =
+                        conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(
+                    1,
+                    "DA_THANH_TOAN"
+            );
+
+            ps.setString(
+                    2,
+                    maGiaoDich
+            );
+
+            ps.setInt(
+                    3,
+                    maDon
+            );
+
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // =====================================================
+// TÌM ĐƠN THEO NỘI DUNG THANH TOÁN
+// =====================================================
+
+    public DonHang layDonHangTheoNoiDungThanhToan(
+            String noiDung) {
+
+        String sql =
+                "SELECT * FROM don_hang " +
+                        "WHERE noi_dung_thanh_toan = ? " +
+                        "LIMIT 1";
+
+
+        try (
+                Connection conn =
+                        KetNoiCSDL.getConnection();
+
+                PreparedStatement ps =
+                        conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(
+                    1,
+                    noiDung
+            );
+
+
+            try (
+                    ResultSet rs =
+                            ps.executeQuery()
+            ) {
+
+                if (rs.next()) {
+
+                    return mapResultSet(rs);
+                }
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }
+
+    public boolean capNhatNoiDungThanhToan(
+            int maDon,
+            String noiDungThanhToan) {
+
+        String sql =
+                "UPDATE don_hang " +
+                        "SET noi_dung_thanh_toan = ? " +
+                        "WHERE ma_don = ?";
+
+        try (Connection conn = KetNoiCSDL.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, noiDungThanhToan);
+            ps.setInt(2, maDon);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 }
