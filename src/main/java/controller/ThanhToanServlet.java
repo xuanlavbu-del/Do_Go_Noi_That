@@ -49,6 +49,8 @@ public class ThanhToanServlet extends HttpServlet {
 
         khachHangDAO =
                 new KhachHangDAO();
+        vietQRService =
+                new VietQRService();
     }
 
 
@@ -682,15 +684,13 @@ public class ThanhToanServlet extends HttpServlet {
              * ==========================================
              */
 
-            VietQRService qrService =
-                    new VietQRService();
-
-
             String qrUrl =
-                    qrService.taoQR(
+                    vietQRService.taoQR(
                             tongTien,
                             noiDungThanhToan
                     );
+
+
 
 
             request.setAttribute(

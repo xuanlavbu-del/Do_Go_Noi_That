@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.GioHang" %>
-
+<%@ page import="config.PaymentConfig" %>
 <%
     List<GioHang> gioHang =
             (List<GioHang>) request.getAttribute("gioHang");
@@ -482,12 +482,11 @@
 
         <% if ("VBSP".equals(phuongThuc)) { %>
 
+
         <%
             String qrUrl =
                     (String) request.getAttribute("qrUrl");
         %>
-
-        <% if (qrUrl != null) { %>
 
         <div class="qr-payment">
 
@@ -495,6 +494,46 @@
                 Thanh toán bằng VBSP SmartBanking
             </h3>
 
+            <div class="payment-information">
+
+                <p>
+                    <strong>Ngân hàng:</strong>
+                    <%= PaymentConfig.BANK_NAME %>
+                </p>
+
+                <p>
+                    <strong>Số tài khoản:</strong>
+                    <%= PaymentConfig.ACCOUNT_NUMBER %>
+                </p>
+
+                <p>
+                    <strong>Chủ tài khoản:</strong>
+                    <%= PaymentConfig.ACCOUNT_NAME %>
+                </p>
+
+                <p>
+                    <strong>Số tiền:</strong>
+
+                    <span class="amount">
+                <%= String.format(
+                        "%,.0f",
+                        tongTien
+                ) %> VNĐ
+            </span>
+                </p>
+
+                <p>
+                    <strong>Nội dung chuyển khoản:</strong>
+
+                    <span class="payment-content">
+                <%= noiDungThanhToan %>
+            </span>
+                </p>
+
+            </div>
+
+
+            <% if (qrUrl != null && !qrUrl.isEmpty()) { %>
 
             <div class="qr-container">
 
@@ -506,44 +545,13 @@
 
             </div>
 
+            <% } else { %>
 
-            <div class="payment-information">
-
-                <p>
-
-                    <strong>
-                        Số tiền:
-                    </strong>
-
-                    <span class="amount">
-
-                    <%= String.format(
-                            "%,.0f",
-                            tongTien
-                    ) %>
-
-                    VNĐ
-
-                </span>
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Nội dung chuyển khoản:
-                    </strong>
-
-                    <span class="payment-content">
-
-                    <%= noiDungThanhToan %>
-
-                </span>
-
-                </p>
-
+            <div class="alert alert-error">
+                Không tạo được mã QR thanh toán.
             </div>
+
+            <% } %>
 
 
             <div class="qr-instruction">
@@ -561,15 +569,21 @@
                 </p>
 
                 <p>
-                    4. Kiểm tra số tiền và nội dung
+                    4. Kiểm tra thông tin người nhận.
+                </p>
+
+                <p>
+                    5. Kiểm tra số tiền và nội dung
                     trước khi xác nhận.
                 </p>
 
             </div>
 
+
+
         </div>
 
-        <% } %>
+
 
         <% } else { %>
 
@@ -818,41 +832,28 @@
 
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
 
-    const form =
-        document.getElementById(
-            "paymentForm"
-        );
+        const form = document.getElementById("paymentForm");
 
+        if (form) {
 
-    if (form) {
-
-        form.addEventListener(
-            "submit",
-            function () {
+            form.addEventListener("submit", function () {
 
                 const button =
-                    document.getElementById(
-                        "submitButton"
-                    );
-
+                    document.getElementById("submitButton");
 
                 if (button) {
-
                     button.disabled = true;
-
-                    button.innerText =
-                        "ĐANG XỬ LÝ...";
-
+                    button.innerText = "ĐANG XỬ LÝ...";
                 }
 
-            }
-        );
+            });
 
-    }
+        }
 
+    });
 </script>
-
 </body>
 
 </html>
