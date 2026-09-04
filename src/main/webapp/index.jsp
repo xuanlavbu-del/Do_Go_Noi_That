@@ -16,7 +16,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Nội Thất Nguyên Khôi</title>
+    <title>Đồ gỗ Việt </title>
 
     <!-- Bootstrap 4 -->
     <link rel="stylesheet"
@@ -645,7 +645,7 @@
                 <a href="${pageContext.request.contextPath}/trangChu" class="logo">
 
                     <i class="fas fa-couch"></i>
-                    NGUYÊN KHÔI
+                    ĐỒ GỖ VIỆT
 
                 </a>
 
@@ -979,7 +979,7 @@
 
             <div class="carousel-item active">
 
-                <img src="images/banner/banner1.jpg"
+                <img src="images/ban_ghe_go.jpg"
                      class="banner-img"
                      alt="Nội thất">
 
@@ -1011,7 +1011,7 @@
 
             <div class="carousel-item">
 
-                <img src="images/banner/banner2.jpg"
+                <img src="images/ke_tivi.jpg"
                      class="banner-img"
                      alt="Phòng khách">
 
@@ -1043,7 +1043,7 @@
 
             <div class="carousel-item">
 
-                <img src="images/banner/banner3.jpg"
+                <img src="images/giuong_go.jpg"
                      class="banner-img"
                      alt="Phòng ngủ">
 
@@ -1071,34 +1071,7 @@
             </div>
 
 
-            <!-- BANNER 4 -->
 
-            <div class="carousel-item">
-
-                <img src="images/banner/banner4.jpg"
-                     class="banner-img"
-                     alt="Nội thất văn phòng">
-
-                <div class="banner-overlay">
-
-                    <div class="banner-content">
-
-                        <h1>NỘI THẤT VĂN PHÒNG</h1>
-
-                        <p>
-                            Không gian làm việc chuyên nghiệp
-                        </p>
-
-                        <a href="#san-pham"
-                           class="btn btn-banner">
-
-                            KHÁM PHÁ
-
-                        </a>
-
-                    </div>
-
-                </div>
 
             </div>
 
@@ -1163,14 +1136,11 @@
 
                 <div class="video-wrapper">
 
-                    <!--
-                        Đổi video-cong-ty.mp4 thành
-                        tên video thực tế của bạn.
-                    -->
+
 
                     <video controls>
 
-                        <source src="videos/video-cong-ty.mp4"
+                        <source src="images/video1.mp4"
                                 type="video/mp4">
 
                         Trình duyệt không hỗ trợ video.
@@ -1188,11 +1158,11 @@
 
                 <div class="about-content">
 
-                    <h3>Nội Thất Nguyên Khôi</h3>
+                    <h3>Nội Thất Đồ Gỗ Việt</h3>
 
                     <p>
 
-                        Nội Thất Nguyên Khôi là đơn vị hoạt động
+                        Nội Thất Đồ Gỗ Việt là đơn vị hoạt động
                         trong lĩnh vực cung cấp các sản phẩm nội thất
                         dành cho gia đình, văn phòng và các công trình
                         nội thất.
@@ -1259,7 +1229,7 @@
             <h2>QUÁ TRÌNH HÌNH THÀNH VÀ PHÁT TRIỂN</h2>
 
             <p>
-                Những dấu mốc quan trọng của Nội Thất Nguyên Khôi
+                Những dấu mốc quan trọng của Nội Thất Đồ GỖ Việt
             </p>
 
         </div>
@@ -1277,7 +1247,7 @@
                     <h4>2018</h4>
 
                     <p>
-                        Thành lập Nội Thất Nguyên Khôi,
+                        Thành lập Nội Thất Đồ Gỗ Việt,
                         bắt đầu hoạt động trong lĩnh vực nội thất.
                     </p>
 
@@ -1503,13 +1473,10 @@
                 <div class="product-card">
 
 
-                    <img src="${pageContext.request.contextPath}/images/sanpham/<%= sp.getHinhAnh() %>"
+                    <img src="${pageContext.request.contextPath}/images/<%= sp.getHinhAnh() %>"
                          alt="<%= sp.getTenSanPham() %>"
                          class="product-img">
-                    alt="<%= sp.getTenSanPham() %>"
-                    onerror="
-                    this.src='images/default-product.jpg';
-                    ">
+
 
 
                     <div class="product-info">
@@ -1653,7 +1620,7 @@
                             <h5>Công ty</h5>
 
                             <p>
-                                Công ty TNHH Nội Thất Nguyên Khôi
+                                Công ty TNHH Nội Thất Đồ Gỗ Việt
                             </p>
 
                         </div>
@@ -1716,7 +1683,7 @@
                             <h5>Email</h5>
 
                             <p>
-                                info@nguyenkhoi.vn
+                                info@dogoviet.vn
                             </p>
 
                         </div>
@@ -1785,7 +1752,7 @@
 
             <div class="col-md-4 mb-4">
 
-                <h5>NỘI THẤT NGUYÊN KHÔI</h5>
+                <h5>NỘI THẤT ĐỒ GỖ VIỆT</h5>
 
                 <p>
 
@@ -1867,7 +1834,7 @@
 
         <div class="copyright">
 
-            © 2026 Nội Thất Nguyên Khôi.
+            © 2026 Nội Thất Đồ Gỗ Việt.
             All Rights Reserved.
 
         </div>

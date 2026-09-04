@@ -429,10 +429,9 @@
 
                 <div class="col-lg-6">
 
-                    <img src="${pageContext.request.contextPath}/images/sanpham/<%= hinhAnh %>"
+                    <img src="${pageContext.request.contextPath}/images/<%= hinhAnh %>"
                          class="product-detail-image"
-                         alt="<%= sp.getTenSanPham() %>"
-                         onerror="this.src='${pageContext.request.contextPath}/images/default-product.jpg';">
+                         alt="<%= sp.getTenSanPham() %>">
 
                 </div>
 

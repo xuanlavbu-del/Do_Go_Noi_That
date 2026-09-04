@@ -1129,11 +1129,11 @@
 
                     <div class="product-image-box">
 
-                        <img src="${pageContext.request.contextPath}/images/sanpham/<%= hinhAnh %>"
+                        <img src="${pageContext.request.contextPath}/images/<%= hinhAnh %>"
                              class="product-image"
                              alt="<%= sp.getTenSanPham() %>"
-                             loading="lazy"
-                             onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/images/default-product.jpg';">
+                             loading="lazy">
+
 
                     </div>
 

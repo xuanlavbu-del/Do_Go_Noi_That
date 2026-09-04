@@ -1193,7 +1193,7 @@
                     <div class="product-image-box">
 
 
-                        <img src="${pageContext.request.contextPath}/images/sanpham/<%= hinhAnh %>"
+                        <img src="${pageContext.request.contextPath}/images/<%= hinhAnh %>"
                              class="product-image"
                              alt="<%= sp.getTenSanPham() %>"
                              loading="lazy"

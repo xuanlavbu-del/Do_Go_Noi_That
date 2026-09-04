@@ -505,7 +505,7 @@
                     <div class="cart-item">
 
                         <img
-                                src="${pageContext.request.contextPath}/images/sanpham/<%= hinhAnh %>"
+                                src="${pageContext.request.contextPath}/images/<%= hinhAnh %>"
                                 class="cart-image"
                                 alt="<%= ten %>"
                                 onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/images/default-product.jpg';"
