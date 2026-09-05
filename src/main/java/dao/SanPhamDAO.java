@@ -377,93 +377,72 @@ public class SanPhamDAO {
 
     public List<SanPham> timKiemSanPham(String tuKhoa) {
 
+        List<SanPham> danhSach = new ArrayList<>();
 
-        List<SanPham> danhSach =
-                new ArrayList<>();
+        if (tuKhoa == null || tuKhoa.trim().isEmpty()) {
+            return danhSach;
+        }
 
+        tuKhoa = tuKhoa.trim();
 
-        String sql =
-                """
-                SELECT *
-                FROM san_pham
-                WHERE ten_san_pham LIKE ?
-                """;
-
-
+        String sql = """
+        SELECT *
+        FROM san_pham
+        WHERE ten_san_pham LIKE ?
+        ORDER BY ten_san_pham ASC
+        LIMIT 8
+        """;
 
         try (
                 Connection conn = KetNoiCSDL.getConnection();
-                PreparedStatement ps =
-                        conn.prepareStatement(sql)
-
+                PreparedStatement ps = conn.prepareStatement(sql)
         ) {
 
+            ps.setString(1, "%" + tuKhoa + "%");
 
-            ps.setString(
-                    1,
-                    "%" + tuKhoa + "%"
-            );
+            try (ResultSet rs = ps.executeQuery()) {
 
+                while (rs.next()) {
 
-            ResultSet rs = ps.executeQuery();
+                    SanPham sp = new SanPham();
 
+                    sp.setMaSanPham(
+                            rs.getInt("ma_san_pham")
+                    );
 
+                    sp.setTenSanPham(
+                            rs.getString("ten_san_pham")
+                    );
 
-            while (rs.next()) {
+                    sp.setGia(
+                            rs.getDouble("gia")
+                    );
 
+                    sp.setSoLuong(
+                            rs.getInt("so_luong")
+                    );
 
-                SanPham sp = new SanPham();
+                    sp.setMoTa(
+                            rs.getString("mo_ta")
+                    );
 
+                    sp.setHinhAnh(
+                            rs.getString("hinh_anh")
+                    );
 
-                sp.setMaSanPham(
-                        rs.getInt("ma_san_pham")
-                );
+                    sp.setMaDanhMuc(
+                            rs.getInt("ma_danh_muc")
+                    );
 
-
-                sp.setTenSanPham(
-                        rs.getString("ten_san_pham")
-                );
-
-
-                sp.setGia(
-                        rs.getDouble("gia")
-                );
-
-
-                sp.setSoLuong(
-                        rs.getInt("so_luong")
-                );
-
-
-                sp.setMoTa(
-                        rs.getString("mo_ta")
-                );
-
-
-                sp.setHinhAnh(
-                        rs.getString("hinh_anh")
-                );
-
-
-                sp.setMaDanhMuc(
-                        rs.getInt("ma_danh_muc")
-                );
-
-
-                danhSach.add(sp);
-
+                    danhSach.add(sp);
+                }
             }
 
-
-        } catch(Exception e){
-
+        } catch (Exception e) {
             e.printStackTrace();
-
         }
 
-
         return danhSach;
-
     }
 
 
