@@ -1405,7 +1405,7 @@
 
                     <div class="banner-content">
 
-                        <h1>NỘI THẤT NGUYÊN KHÔI</h1>
+                        <h1>ĐỒ GỖ VIỆT</h1>
 
                         <p>
                             Kiến tạo không gian sống hiện đại
